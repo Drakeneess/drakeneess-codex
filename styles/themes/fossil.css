@@ -1,0 +1,45 @@
+.theme-fossil {
+  --story-bg: #080908;
+  --story-panel: #12130f;
+  --story-text: #eee8dc;
+  --story-muted: #a7a08f;
+  --story-accent: #718c5a;
+  --story-accent-soft: #c9b27c;
+}
+
+.theme-fossil .fossil-prose {
+  color: var(--story-text);
+}
+
+.theme-fossil .fossil-prose h1,
+.theme-fossil .fossil-prose h2,
+.theme-fossil .fossil-prose h3 {
+  color: #eee8dc;
+  font-weight: 600;
+}
+
+.theme-fossil .fossil-prose p {
+  color: #c8c0aa;
+  line-height: 2;
+}
+
+.theme-fossil .fossil-prose strong {
+  color: #eee8dc;
+}
+
+.theme-fossil .fossil-prose em {
+  color: #c9b27c;
+}
+
+.theme-fossil .fossil-prose hr {
+  margin: 2.5rem 0;
+  border: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(113, 140, 90, 0.55),
+    rgba(201, 178, 124, 0.24),
+    transparent
+  );
+}

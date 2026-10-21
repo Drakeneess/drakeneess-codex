@@ -1,0 +1,17 @@
+.codex-card {
+  border: 1px solid var(--codex-line);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012)),
+    rgba(20, 16, 23, 0.76);
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.codex-card:hover {
+  border-color: rgba(138, 42, 69, 0.72);
+  box-shadow:
+    0 28px 90px rgba(0, 0, 0, 0.45),
+    0 0 36px rgba(110, 31, 53, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}

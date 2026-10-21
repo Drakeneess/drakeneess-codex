@@ -1,0 +1,82 @@
+.victorian-frame {
+  position: relative;
+  border: 1px solid rgba(216, 213, 207, 0.18);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent),
+    rgba(13, 13, 18, 0.72);
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(138, 42, 69, 0.18);
+  isolation: isolate;
+}
+
+.victorian-frame::before,
+.victorian-frame::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  width: 42px;
+  height: 42px;
+  border-color: rgba(216, 213, 207, 0.34);
+}
+
+.victorian-frame::before {
+  top: 14px;
+  left: 14px;
+  border-top: 1px solid;
+  border-left: 1px solid;
+}
+
+.victorian-frame::after {
+  right: 14px;
+  bottom: 14px;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+}
+
+.victorian-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.victorian-divider::before,
+.victorian-divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(138, 42, 69, 0.75),
+    rgba(216, 213, 207, 0.24),
+    transparent
+  );
+}
+
+.victorian-divider span {
+  color: var(--codex-platinum-soft);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+}
+
+.platinum-divider span {
+  color: var(--codex-platinum);
+  text-shadow:
+    0 0 12px rgba(216, 213, 207, 0.18),
+    0 0 22px rgba(110, 31, 53, 0.28);
+}
+
+.platinum-divider::before,
+.platinum-divider::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(138, 42, 69, 0.75),
+    rgba(216, 213, 207, 0.42),
+    rgba(138, 42, 69, 0.75),
+    transparent
+  );
+}

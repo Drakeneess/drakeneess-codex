@@ -1,0 +1,35 @@
+.victorian-button {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(216, 213, 207, 0.18);
+  background:
+    linear-gradient(135deg, rgba(138, 42, 69, 0.95), rgba(58, 13, 28, 0.95));
+  color: var(--codex-text);
+  box-shadow:
+    0 18px 40px rgba(110, 31, 53, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.victorian-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  translate: -120% 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(216, 213, 207, 0.18),
+    transparent
+  );
+  transition: translate 500ms ease;
+}
+
+.victorian-button:hover::before {
+  translate: 120% 0;
+}
+
+.victorian-button:hover {
+  border-color: rgba(216, 213, 207, 0.36);
+  background:
+    linear-gradient(135deg, rgba(176, 58, 90, 0.95), rgba(110, 31, 53, 0.95));
+}

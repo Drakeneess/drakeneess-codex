@@ -1,0 +1,21 @@
+:root {
+  --codex-black: #07070a;
+  --codex-black-soft: #0d0d12;
+  --codex-panel: #141017;
+  --codex-panel-soft: #1b121c;
+
+  --codex-text: #f1e9e0;
+  --codex-muted: #a99ca3;
+
+  --codex-wine: #6e1f35;
+  --codex-wine-soft: #8a2a45;
+  --codex-wine-bright: #b03a5a;
+  --codex-wine-dark: #3a0d1c;
+
+  --codex-platinum: #d8d5cf;
+  --codex-platinum-soft: #b8b4ad;
+  --codex-platinum-muted: #8f8a84;
+  --codex-platinum-dark: #5f5a56;
+
+  --codex-line: rgba(255, 255, 255, 0.1);
+}

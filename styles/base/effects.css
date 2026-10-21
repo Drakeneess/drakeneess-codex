@@ -1,0 +1,29 @@
+@keyframes platinumSheen {
+  0%,
+  100% {
+    background-position: 0% 50%;
+    filter: brightness(0.96);
+  }
+
+  50% {
+    background-position: 100% 50%;
+    filter: brightness(1.08);
+  }
+}
+
+@keyframes ornamentPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    filter: drop-shadow(0 0 0 rgba(138, 42, 69, 0));
+  }
+
+  50% {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 12px rgba(138, 42, 69, 0.35));
+  }
+}
+
+.ornament-pulse {
+  animation: ornamentPulse 5.5s ease-in-out infinite;
+}

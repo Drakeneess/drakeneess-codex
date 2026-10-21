@@ -1,0 +1,25 @@
+.codex-serif {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.platinum-title {
+  background: linear-gradient(
+    115deg,
+    #f7f4ee 0%,
+    #d8d5cf 18%,
+    #9f9a93 38%,
+    #f1eee8 52%,
+    #b8b4ad 68%,
+    #ffffff 82%,
+    #8f8a84 100%
+  );
+  background-size: 220% 220%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.18),
+    0 12px 34px rgba(216, 213, 207, 0.08),
+    0 0 46px rgba(110, 31, 53, 0.24);
+  animation: platinumSheen 8s ease-in-out infinite;
+}

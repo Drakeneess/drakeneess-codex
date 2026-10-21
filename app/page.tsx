@@ -1,65 +1,81 @@
-import Image from "next/image";
+import Link from "next/link";
+import { getStories } from "../lib/stories";
+import { StoryCard } from "../components/story/StoryCard";
+import { FadeIn } from "../components/motion/FadeIn";
+import { StaggerContainer } from "../components/motion/StaggerContainer";
+import { StaggerItem } from "../components/motion/StaggerItem";
 
-export default function Home() {
+export default async function HomePage() {
+  const stories = await getStories();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main className="px-6">
+      <section className="mx-auto flex min-h-[78vh] max-w-7xl items-center py-20">
+        <FadeIn className="w-full">
+          <div className="victorian-frame relative w-full rounded-[2rem] p-8 md:p-14">
+            <div className="mx-auto max-w-5xl text-center">
+              <p className="mb-5 text-xs uppercase tracking-[0.55em] text-[#8A2A45]">
+                Archivo interactivo de historias
+              </p>
+
+              <h1 className="codex-serif platinum-title text-5xl font-bold tracking-tight md:text-8xl">
+                The Drakeneess Codex
+              </h1>
+
+              <div className="victorian-divider platinum-divider mx-auto my-8 max-w-3xl">
+                <span>Archivo</span>
+              </div>
+
+              <p className="mx-auto max-w-2xl text-lg leading-8 text-[#A99CA3]">
+                Un códice digital para relatos, mundos y archivos que esperan ser abiertos
+                con más curiosidad que prudencia.
+              </p>
+
+              <div className="mt-10 flex flex-wrap justify-center gap-4">
+                <Link
+                  href="/stories"
+                  className="victorian-button rounded-full px-7 py-3 text-sm font-semibold transition hover:scale-105"
+                >
+                  <span className="relative z-10">Explorar historias</span>
+                </Link>
+
+                <Link
+                  href="/archive"
+                  className="rounded-full border border-[#8A2A45]/50 bg-[#141017]/70 px-7 py-3 text-sm font-semibold text-[#F1E9E0] transition hover:border-[#D8D5CF]/35 hover:text-[#D86A89]"
+                >
+                  Entrar al archivo
+                </Link>
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+      </section>
+
+      <section className="mx-auto max-w-7xl pb-24">
+        <FadeIn>
+          <div className="mb-8 text-center">
+            <p className="text-xs uppercase tracking-[0.42em] text-[#8A2A45]">
+              Destacadas
+            </p>
+
+            <h2 className="codex-serif mt-3 text-4xl font-semibold text-[#F1E9E0]">
+              Historias principales
+            </h2>
+
+            <div className="victorian-divider mx-auto mt-6 max-w-xl">
+              <span>Mundos</span>
+            </div>
+          </div>
+        </FadeIn>
+
+        <StaggerContainer className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {stories.map((story) => (
+            <StaggerItem key={story.slug}>
+              <StoryCard story={story} />
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
+      </section>
+    </main>
   );
 }
