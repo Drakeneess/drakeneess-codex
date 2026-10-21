@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# content
+content/
+README_DATOS_HISTORIA_CODEX.md
+README_TUTORIAL_SISTEMA_CODEX.md
