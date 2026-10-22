@@ -3,7 +3,7 @@ export default function CodexPage() {
     <main className="px-6 py-20">
       <section className="mx-auto max-w-5xl">
         <p className="text-sm uppercase tracking-[0.35em] text-[#C7A76C]">
-          Codex
+          Códice
         </p>
 
         <h1 className="mt-3 text-5xl font-bold text-[#E8E2D6]">
@@ -11,9 +11,8 @@ export default function CodexPage() {
         </h1>
 
         <p className="mt-6 max-w-2xl leading-8 text-[#A6A090]">
-          Aquí vivirán personajes, facciones, líneas temporales, clases,
-          monstruos, tecnologías y todas esas cosas que convierten una historia
-          en un ecosistema peligrosamente grande.
+          Personajes, facciones, líneas temporales, tecnologías, criaturas y
+          otros elementos que ayudan a organizar el contexto de cada obra.
         </p>
       </section>
     </main>
