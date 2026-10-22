@@ -10,63 +10,46 @@ type StoryCardProps = {
 
 export function StoryCard({ story }: StoryCardProps) {
   return (
-    <motion.div
-      whileHover={{
-        y: -6,
-        scale: 1.015,
-      }}
-      whileTap={{
-        scale: 0.985,
-      }}
-      transition={{
-        duration: 0.25,
-        ease: "easeOut",
-      }}
+    <motion.article
+      whileTap={{ scale: 0.99 }}
+      transition={{ duration: 0.18, ease: "easeOut" }}
+      className="h-full"
     >
       <Link
         href={`/stories/${story.slug}`}
-        className="group codex-card relative block overflow-hidden rounded-2xl p-5 transition duration-300"
+        className="group codex-folio-card flex h-full flex-col p-6 md:p-7"
       >
-        <motion.div
-          className="pointer-events-none absolute left-4 top-4 h-8 w-8 border-l border-t border-[#8A2A45]/45"
-          animate={{
-            opacity: [0.35, 0.75, 0.35],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-
-        <motion.div
-          className="pointer-events-none absolute bottom-4 right-4 h-8 w-8 border-b border-r border-[#8A2A45]/45"
-          animate={{
-            opacity: [0.75, 0.35, 0.75],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-
-        <div className="relative z-10">
-          <div className="mb-5 flex items-center justify-between gap-3">
-            <span className="rounded-full border border-[#8A2A45]/40 bg-[#6E1F35]/15 px-3 py-1 text-xs uppercase tracking-[0.2em] text-[#D86A89]">
-              Publicado
+        <div className="relative z-10 flex h-full flex-col">
+          <div className="flex items-start justify-between gap-4">
+            <span className="codex-folio-label">Registro publicado</span>
+            <span
+              className="codex-serif text-4xl leading-none text-[#D8D5CF]/10 transition duration-300 group-hover:text-[#8A2A45]/35"
+              aria-hidden="true"
+            >
+              §
             </span>
           </div>
 
-          <h2 className="codex-serif text-2xl font-semibold text-[#F1E9E0] transition group-hover:text-[#D86A89]">
-            {story.title}
-          </h2>
+          <div className="mt-10 flex-1">
+            <h2 className="codex-serif max-w-[14ch] text-3xl font-semibold leading-tight text-[#F1E9E0] transition duration-300 group-hover:text-[#E5D9D2]">
+              {story.title}
+            </h2>
 
-          <p className="mt-5 line-clamp-3 text-sm leading-6 text-[#D8CBD0]">
-            {story.description}
-          </p>
+            <p className="mt-5 line-clamp-4 max-w-[34rem] text-sm leading-7 text-[#B8ABB1]">
+              {story.description}
+            </p>
+          </div>
+
+          <div className="mt-10 flex items-end justify-between gap-4 border-t border-white/[0.07] pt-4">
+            <span className="text-[0.62rem] uppercase tracking-[0.2em] text-[#6F676B]">
+              {story.theme.id}
+            </span>
+            <span className="codex-folio-arrow">
+              Abrir <span aria-hidden="true">→</span>
+            </span>
+          </div>
         </div>
       </Link>
-    </motion.div>
+    </motion.article>
   );
 }
