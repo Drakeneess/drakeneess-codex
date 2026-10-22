@@ -1,23 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { usePathname } from "next/navigation";
-import {
-  getThemeVisualIdFromPathname,
-  themeVisuals,
-} from "../../lib/theme-visuals";
+import { useThemeRuntime } from "./ThemeRuntime";
 
 export function AnimatedThemeBackground() {
-  const pathname = usePathname();
-  const themeId = getThemeVisualIdFromPathname(pathname);
-  const theme = themeVisuals[themeId];
+  const { theme } = useThemeRuntime();
+  const visuals = theme.visuals;
 
   return (
     <div className="pointer-events-none fixed inset-0 -z-20 overflow-hidden">
       <motion.div
         className="absolute inset-0"
         animate={{
-          backgroundColor: theme.bg,
+          backgroundColor: visuals.bg,
         }}
         transition={{
           duration: 1.45,
@@ -28,7 +23,7 @@ export function AnimatedThemeBackground() {
       <motion.div
         className="absolute -left-40 -top-40 h-[42rem] w-[42rem] rounded-full blur-3xl"
         animate={{
-          backgroundColor: theme.glow,
+          backgroundColor: visuals.glow,
           opacity: 0.18,
           scale: [1, 1.03, 1],
         }}
@@ -51,7 +46,7 @@ export function AnimatedThemeBackground() {
       <motion.div
         className="absolute -bottom-44 -right-44 h-[38rem] w-[38rem] rounded-full blur-3xl"
         animate={{
-          backgroundColor: theme.glowSoft,
+          backgroundColor: visuals.glowSoft,
           opacity: 0.08,
           scale: [1, 1.04, 1],
         }}
