@@ -4,13 +4,13 @@ import { FadeIn } from "@/components/motion/FadeIn";
 import { StaggerContainer } from "@/components/motion/StaggerContainer";
 import { StaggerItem } from "@/components/motion/StaggerItem";
 
+export const dynamic = "force-dynamic";
 
 export default async function StoriesPage() {
   const stories = await getStories();
 
   return (
-    <main className={`story-page px-6 py-20`}>
-
+    <main className="story-page px-6 py-20">
       <section className="mx-auto max-w-5xl">
         <FadeIn>
           <p className="text-sm uppercase tracking-[0.35em] text-[#8A2A45]">
