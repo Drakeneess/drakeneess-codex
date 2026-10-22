@@ -1,13 +1,14 @@
-import type { Story } from "@/lib/stories";
+import type {
+  StoryChapter,
+  StorySummary,
+} from "@/lib/stories";
 import { getThemeDefinition } from "@/lib/theme-registry";
 import { DefaultChapterLayout } from "./DefaultChapterLayout";
 import { FossilChapterLayout } from "./FossilChapterLayout";
 
-type Chapter = Story["chapters"][number];
-
 type StoryChapterLayoutProps = {
-  story: Story;
-  chapter: Chapter;
+  story: StorySummary;
+  chapter: StoryChapter;
   children: React.ReactNode;
 };
 
@@ -16,7 +17,7 @@ export function StoryChapterLayout({
   chapter,
   children,
 }: StoryChapterLayoutProps) {
-  const theme = getThemeDefinition(story.theme?.id);
+  const theme = getThemeDefinition(story.theme.id);
 
   switch (theme.chapterLayout) {
     case "fossil":
