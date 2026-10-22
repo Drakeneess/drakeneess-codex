@@ -1,4 +1,5 @@
 import type { Story } from "@/lib/stories";
+import { getThemeDefinition } from "@/lib/theme-registry";
 import { DefaultStoryPresentation } from "./DefaultStoryPresentation";
 import { FossilStoryPresentation } from "./FossilStoryPresentation";
 
@@ -7,10 +8,9 @@ type StoryPresentationProps = {
 };
 
 export function StoryPresentation({ story }: StoryPresentationProps) {
-  const layout = story.theme?.layout ?? story.theme?.id ?? "default";
+  const theme = getThemeDefinition(story.theme?.id);
 
-  switch (layout) {
-    case "museum":
+  switch (theme.presentation) {
     case "fossil":
       return <FossilStoryPresentation story={story} />;
 

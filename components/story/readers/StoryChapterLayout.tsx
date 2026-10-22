@@ -1,7 +1,7 @@
 import type { Story } from "@/lib/stories";
+import { getThemeDefinition } from "@/lib/theme-registry";
 import { DefaultChapterLayout } from "./DefaultChapterLayout";
 import { FossilChapterLayout } from "./FossilChapterLayout";
-
 
 type Chapter = Story["chapters"][number];
 
@@ -16,10 +16,9 @@ export function StoryChapterLayout({
   chapter,
   children,
 }: StoryChapterLayoutProps) {
-  const layout = story.theme?.layout ?? story.theme?.id ?? "default";
+  const theme = getThemeDefinition(story.theme?.id);
 
-  switch (layout) {
-    case "museum":
+  switch (theme.chapterLayout) {
     case "fossil":
       return (
         <FossilChapterLayout story={story} chapter={chapter}>
