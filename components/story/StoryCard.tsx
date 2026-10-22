@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import type { PointerEvent } from "react";
 import type { StorySummary } from "../../lib/stories";
 
 type StoryCardProps = {
@@ -10,17 +11,39 @@ type StoryCardProps = {
 
 export function StoryCard({ story }: StoryCardProps) {
   const publishedYear = story.publishedAt.slice(0, 4);
+  const reduceMotion = useReducedMotion();
+
+  const handlePointerMove = (event: PointerEvent<HTMLAnchorElement>) => {
+    if (reduceMotion) return;
+
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width;
+    const y = (event.clientY - rect.top) / rect.height;
+
+    event.currentTarget.style.setProperty("--folio-x", `${x * 100}%`);
+    event.currentTarget.style.setProperty("--folio-y", `${y * 100}%`);
+    event.currentTarget.style.setProperty("--folio-tilt-x", `${(0.5 - y) * 5}deg`);
+    event.currentTarget.style.setProperty("--folio-tilt-y", `${(x - 0.5) * 7}deg`);
+  };
+
+  const handlePointerLeave = (event: PointerEvent<HTMLAnchorElement>) => {
+    event.currentTarget.style.setProperty("--folio-x", "82%");
+    event.currentTarget.style.setProperty("--folio-y", "10%");
+    event.currentTarget.style.setProperty("--folio-tilt-x", "0deg");
+    event.currentTarget.style.setProperty("--folio-tilt-y", "0deg");
+  };
 
   return (
     <motion.article
-      whileHover={{ y: -3 }}
-      whileTap={{ scale: 0.99 }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
+      whileTap={reduceMotion ? undefined : { scale: 0.99 }}
+      transition={{ duration: 0.18, ease: "easeOut" }}
       className="h-full"
     >
       <Link
         href={`/stories/${story.slug}`}
         className="group codex-folio-card flex h-full flex-col p-6 md:p-7"
+        onPointerMove={handlePointerMove}
+        onPointerLeave={handlePointerLeave}
       >
         <div className="relative z-10 flex h-full flex-col">
           <div className="flex items-start justify-between gap-4">
