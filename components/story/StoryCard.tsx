@@ -9,6 +9,8 @@ type StoryCardProps = {
 };
 
 export function StoryCard({ story }: StoryCardProps) {
+  const publishedYear = story.publishedAt.slice(0, 4);
+
   return (
     <motion.article
       whileTap={{ scale: 0.99 }}
@@ -42,7 +44,7 @@ export function StoryCard({ story }: StoryCardProps) {
 
           <div className="mt-10 flex items-end justify-between gap-4 border-t border-white/[0.07] pt-4">
             <span className="text-[0.62rem] uppercase tracking-[0.2em] text-[#6F676B]">
-              {story.theme.id}
+              Publicado · {publishedYear}
             </span>
             <span className="codex-folio-arrow">
               Abrir <span aria-hidden="true">→</span>
