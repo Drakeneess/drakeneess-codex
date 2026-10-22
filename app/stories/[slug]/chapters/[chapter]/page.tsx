@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getChapterBySlug } from "@/lib/stories";
-import { getStoryTheme } from "@/lib/story-themes";
+import { getThemeDefinition } from "@/lib/theme-registry";
 import { StoryChapterLayout } from "@/components/story/readers/StoryChapterLayout";
 
 type ChapterPageProps = {
@@ -18,7 +18,7 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
     notFound();
   }
 
-  const theme = getStoryTheme(result.story.theme?.id);
+  const theme = getThemeDefinition(result.story.theme?.id);
 
   const ChapterContent = await import(
     `@/content/stories/${slug}/chapters/${chapter}.mdx`
