@@ -13,8 +13,9 @@ export function StoryCard({ story }: StoryCardProps) {
 
   return (
     <motion.article
+      whileHover={{ y: -3 }}
       whileTap={{ scale: 0.99 }}
-      transition={{ duration: 0.18, ease: "easeOut" }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
       className="h-full"
     >
       <Link
@@ -25,7 +26,7 @@ export function StoryCard({ story }: StoryCardProps) {
           <div className="flex items-start justify-between gap-4">
             <span className="codex-folio-label">Registro publicado</span>
             <span
-              className="codex-serif text-4xl leading-none text-[#D8D5CF]/10 transition duration-300 group-hover:text-[#8A2A45]/35"
+              className="codex-serif text-4xl leading-none text-[#D8D5CF]/12 transition duration-300 group-hover:text-[#8A2A45]/45"
               aria-hidden="true"
             >
               §
@@ -33,9 +34,11 @@ export function StoryCard({ story }: StoryCardProps) {
           </div>
 
           <div className="mt-10 flex-1">
-            <h2 className="codex-serif max-w-[14ch] text-3xl font-semibold leading-tight text-[#F1E9E0] transition duration-300 group-hover:text-[#E5D9D2]">
+            <h2 className="codex-serif max-w-[14ch] text-3xl font-semibold leading-tight text-[#F1E9E0] transition duration-300 group-hover:text-[#E9DDE1]">
               {story.title}
             </h2>
+
+            <div className="mt-4 h-px w-16 bg-gradient-to-r from-[#8A2A45]/70 to-transparent" />
 
             <p className="mt-5 line-clamp-4 max-w-[34rem] text-sm leading-7 text-[#B8ABB1]">
               {story.description}
