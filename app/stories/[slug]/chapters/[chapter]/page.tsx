@@ -4,6 +4,8 @@ import { getThemeDefinition } from "@/lib/theme-registry";
 import { StoryThemeScope } from "@/components/layout/ThemeRuntime";
 import { StoryChapterLayout } from "@/components/story/readers/StoryChapterLayout";
 
+export const dynamic = "force-dynamic";
+
 type ChapterPageProps = {
   params: Promise<{
     slug: string;
@@ -19,21 +21,17 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
     notFound();
   }
 
-  const theme = getThemeDefinition(result.story.theme?.id);
-
-  const ChapterContent = await import(
-    `@/content/stories/${slug}/chapters/${chapter}.mdx`
-  );
-
-  const Chapter = ChapterContent.default;
+  const theme = getThemeDefinition(result.story.theme.id);
 
   return (
     <>
-      <StoryThemeScope themeKey={result.story.theme?.id} />
+      <StoryThemeScope themeKey={result.story.theme.id} />
 
       <main className={`${theme.readerClass} story-page px-6 py-16`}>
         <StoryChapterLayout story={result.story} chapter={result.chapter}>
-          <Chapter />
+          <div className="whitespace-pre-wrap leading-8 text-[#D8D0C1]">
+            {result.chapter.content}
+          </div>
         </StoryChapterLayout>
       </main>
     </>
