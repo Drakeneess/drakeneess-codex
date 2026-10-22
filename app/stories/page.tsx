@@ -1,5 +1,6 @@
-import { getStories } from "@/lib/stories";
+import { getStoryCatalogState } from "@/lib/stories";
 import { StoryCard } from "@/components/story/StoryCard";
+import { StoryCatalogUnavailable } from "@/components/story/StoryCatalogUnavailable";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { StaggerContainer } from "@/components/motion/StaggerContainer";
 import { StaggerItem } from "@/components/motion/StaggerItem";
@@ -7,7 +8,7 @@ import { StaggerItem } from "@/components/motion/StaggerItem";
 export const dynamic = "force-dynamic";
 
 export default async function StoriesPage() {
-  const stories = await getStories();
+  const { stories, unavailable } = await getStoryCatalogState();
 
   return (
     <main className="story-page px-6 py-20">
@@ -27,13 +28,19 @@ export default async function StoriesPage() {
           </p>
         </FadeIn>
 
-        <StaggerContainer className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {stories.map((story) => (
-            <StaggerItem key={story.slug}>
-              <StoryCard story={story} />
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
+        <div className="mt-12">
+          {unavailable ? (
+            <StoryCatalogUnavailable />
+          ) : (
+            <StaggerContainer className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {stories.map((story) => (
+                <StaggerItem key={story.slug}>
+                  <StoryCard story={story} />
+                </StaggerItem>
+              ))}
+            </StaggerContainer>
+          )}
+        </div>
       </section>
     </main>
   );
