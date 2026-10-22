@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getChapterBySlug } from "@/lib/stories";
 import { getThemeDefinition } from "@/lib/theme-registry";
+import { StoryThemeScope } from "@/components/layout/ThemeRuntime";
 import { StoryChapterLayout } from "@/components/story/readers/StoryChapterLayout";
 
 type ChapterPageProps = {
@@ -27,10 +28,14 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
   const Chapter = ChapterContent.default;
 
   return (
-    <main className={`${theme.readerClass} story-page px-6 py-16`}>
-      <StoryChapterLayout story={result.story} chapter={result.chapter}>
-        <Chapter />
-      </StoryChapterLayout>
-    </main>
+    <>
+      <StoryThemeScope themeKey={result.story.theme?.id} />
+
+      <main className={`${theme.readerClass} story-page px-6 py-16`}>
+        <StoryChapterLayout story={result.story} chapter={result.chapter}>
+          <Chapter />
+        </StoryChapterLayout>
+      </main>
+    </>
   );
 }
