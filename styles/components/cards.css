@@ -17,22 +17,39 @@
 }
 
 .codex-folio-card {
+  --folio-x: 82%;
+  --folio-y: 10%;
+  --folio-tilt-x: 0deg;
+  --folio-tilt-y: 0deg;
+  --folio-lift: 0px;
   position: relative;
   min-height: 19rem;
   overflow: hidden;
   border: 1px solid rgba(216, 213, 207, 0.14);
   border-radius: 1.25rem;
   background:
+    radial-gradient(
+      circle at var(--folio-x) var(--folio-y),
+      rgba(229, 217, 210, 0.07),
+      transparent 9rem
+    ),
     radial-gradient(circle at 100% 0%, rgba(110, 31, 53, 0.16), transparent 13rem),
     linear-gradient(150deg, rgba(255, 255, 255, 0.035), transparent 35%),
     linear-gradient(180deg, rgba(20, 16, 23, 0.82), rgba(7, 7, 10, 0.92));
   box-shadow:
     0 24px 70px rgba(0, 0, 0, 0.34),
     inset 0 0 0 1px rgba(110, 31, 53, 0.09);
+  transform:
+    perspective(1000px)
+    translateY(var(--folio-lift))
+    rotateX(var(--folio-tilt-x))
+    rotateY(var(--folio-tilt-y));
+  transform-style: preserve-3d;
+  will-change: transform;
   transition:
     border-color 240ms ease,
     box-shadow 240ms ease,
-    transform 240ms ease;
+    transform 180ms ease-out;
 }
 
 .codex-folio-card::before {
@@ -42,6 +59,7 @@
   pointer-events: none;
   border: 1px solid rgba(216, 213, 207, 0.055);
   border-radius: 0.9rem;
+  transition: border-color 220ms ease, box-shadow 220ms ease;
 }
 
 .codex-folio-card::after {
@@ -60,15 +78,38 @@
     transparent
   );
   box-shadow: 0 0 20px rgba(110, 31, 53, 0.18);
+  transition: width 220ms ease, box-shadow 220ms ease;
 }
 
-.codex-folio-card:hover {
-  transform: translateY(-4px);
+.codex-folio-card > div {
+  transform: translateZ(18px);
+}
+
+.codex-folio-card:hover,
+.codex-folio-card:focus-visible {
+  --folio-lift: -4px;
   border-color: rgba(138, 42, 69, 0.62);
   box-shadow:
     0 32px 86px rgba(0, 0, 0, 0.43),
     0 0 34px rgba(110, 31, 53, 0.14),
     inset 0 0 0 1px rgba(216, 213, 207, 0.05);
+}
+
+.codex-folio-card:hover::before,
+.codex-folio-card:focus-visible::before {
+  border-color: rgba(216, 213, 207, 0.1);
+  box-shadow: inset 0 0 26px rgba(110, 31, 53, 0.05);
+}
+
+.codex-folio-card:hover::after,
+.codex-folio-card:focus-visible::after {
+  width: 3px;
+  box-shadow: 0 0 28px rgba(138, 42, 69, 0.28);
+}
+
+.codex-folio-card:focus-visible {
+  outline: 1px solid rgba(229, 217, 210, 0.72);
+  outline-offset: 0.35rem;
 }
 
 .codex-folio-label {
@@ -89,6 +130,13 @@
   border: 1px solid currentColor;
   box-shadow: 0 0 12px rgba(176, 58, 90, 0.18);
   transform: rotate(45deg);
+  transition: transform 260ms ease, box-shadow 260ms ease;
+}
+
+.group:hover .codex-folio-label::before,
+.group:focus-visible .codex-folio-label::before {
+  transform: rotate(135deg);
+  box-shadow: 0 0 18px rgba(176, 58, 90, 0.32);
 }
 
 .codex-folio-arrow {
@@ -104,7 +152,22 @@
     gap 220ms ease;
 }
 
-.group:hover .codex-folio-arrow {
+.group:hover .codex-folio-arrow,
+.group:focus-visible .codex-folio-arrow {
   gap: 0.82rem;
   color: var(--codex-platinum);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .codex-folio-card {
+    --folio-tilt-x: 0deg !important;
+    --folio-tilt-y: 0deg !important;
+    transform: translateY(var(--folio-lift));
+    transition-duration: 0.01ms;
+  }
+
+  .codex-folio-label::before,
+  .codex-folio-arrow {
+    transition-duration: 0.01ms;
+  }
 }
