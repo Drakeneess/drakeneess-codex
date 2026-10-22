@@ -1,6 +1,9 @@
 import "server-only";
 
 import {
+  PublicCodexApiError,
+  PublicCodexConfigError,
+  PublicCodexNetworkError,
   getChapterBySlug as getPublicChapterBySlug,
   getStories as getPublicStories,
   getStoryBySlug as getPublicStoryBySlug,
@@ -42,6 +45,11 @@ export interface Story extends StorySummary {
   chapters: StoryChapter[];
 }
 
+export interface StoryCatalogState {
+  stories: StorySummary[];
+  unavailable: boolean;
+}
+
 function mapStorySummary(story: PublicStorySummary): StorySummary {
   return {
     slug: story.slug,
@@ -79,9 +87,37 @@ function mapStory(story: PublicStory): Story {
   };
 }
 
+function isStorySourceUnavailable(error: unknown) {
+  return (
+    error instanceof PublicCodexConfigError ||
+    error instanceof PublicCodexNetworkError ||
+    error instanceof PublicCodexApiError
+  );
+}
+
 export async function getStories(): Promise<StorySummary[]> {
   const stories = await getPublicStories();
   return stories.map(mapStorySummary);
+}
+
+export async function getStoryCatalogState(): Promise<StoryCatalogState> {
+  try {
+    return {
+      stories: await getStories(),
+      unavailable: false,
+    };
+  } catch (error) {
+    if (!isStorySourceUnavailable(error)) {
+      throw error;
+    }
+
+    console.error("[codex] Public story catalog unavailable.", error);
+
+    return {
+      stories: [],
+      unavailable: true,
+    };
+  }
 }
 
 export async function getStoryBySlug(slug: string): Promise<Story | null> {
