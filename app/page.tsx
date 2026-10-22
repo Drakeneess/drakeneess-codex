@@ -16,46 +16,47 @@ export default async function HomePage() {
     <main className="px-4 pb-24 sm:px-6">
       <section className="mx-auto max-w-7xl pt-10 md:pt-16">
         <FadeIn>
-          <div className="codex-home-hero px-6 py-12 md:px-12 md:py-16 lg:px-16 lg:py-20">
-            <div className="relative z-10 grid items-center gap-14 lg:grid-cols-[1.25fr_0.75fr] lg:gap-20">
-              <div>
-                <p className="codex-home-kicker">Archivo narrativo</p>
+          <div className="codex-ceremonial-hero px-6 py-14 md:px-12 md:py-18 lg:px-16 lg:py-20">
+            <div className="codex-hero-corner codex-hero-corner-tl" aria-hidden="true" />
+            <div className="codex-hero-corner codex-hero-corner-br" aria-hidden="true" />
 
-                <h1 className="codex-home-title codex-serif platinum-title mt-6 text-5xl font-bold leading-[0.94] tracking-[-0.04em] sm:text-6xl md:text-7xl lg:text-[5.7rem]">
-                  The Drakeneess Codex
-                </h1>
-
-                <p className="codex-home-lede mt-8">
-                  Un archivo vivo para historias, mundos y documentos que no están hechos
-                  para dormirse en una carpeta. Aquí cada obra conserva su propia voz,
-                  atmósfera y forma de lectura.
-                </p>
-
-                <div className="mt-10 flex flex-wrap gap-3">
-                  <Link href="/stories" className="codex-action-primary">
-                    Explorar historias
-                  </Link>
-
-                  <Link href="/archive" className="codex-action-secondary">
-                    Entrar al archivo
-                  </Link>
-                </div>
+            <div className="relative z-10 mx-auto max-w-5xl text-center">
+              <div className="codex-hero-sigil mx-auto" aria-hidden="true">
+                <span>D</span>
               </div>
 
-              <div className="codex-index-plate flex flex-col items-center justify-between p-8 md:p-10">
-                <div className="codex-index-meta">
-                  <p className="codex-index-rule">Índice / raíz</p>
-                  <p className="codex-index-rule">Colección pública</p>
-                </div>
+              <p className="codex-ceremonial-kicker mt-7">
+                Archivo interactivo de historias
+              </p>
 
-                <div className="codex-index-seal" aria-hidden="true">
-                  <span className="codex-index-seal-mark">D</span>
-                </div>
+              <h1 className="codex-serif platinum-title mx-auto mt-6 max-w-[11ch] text-5xl font-bold leading-[0.92] tracking-[-0.045em] sm:text-6xl md:text-7xl lg:text-[6.3rem]">
+                The Drakeneess Codex
+              </h1>
 
-                <div className="codex-index-meta">
-                  <p className="codex-index-rule">Historias registradas · {storyCount}</p>
-                  <p className="codex-index-rule">Lectura / archivo / códice</p>
-                </div>
+              <div className="codex-ritual-divider mx-auto mt-9 max-w-3xl">
+                <span>Archivo</span>
+              </div>
+
+              <p className="codex-ceremonial-lede mx-auto mt-8 max-w-3xl">
+                Un códice digital para relatos, mundos y archivos que esperan ser abiertos
+                con más curiosidad que prudencia. Cada obra conserva aquí su propia voz,
+                atmósfera y forma de lectura.
+              </p>
+
+              <div className="mt-10 flex flex-wrap justify-center gap-4">
+                <Link href="/stories" className="codex-ritual-action codex-ritual-action-primary">
+                  Explorar historias
+                </Link>
+
+                <Link href="/archive" className="codex-ritual-action codex-ritual-action-secondary">
+                  Entrar al archivo
+                </Link>
+              </div>
+
+              <div className="codex-hero-ledger mx-auto mt-12 max-w-4xl">
+                <span>Índice / raíz</span>
+                <span>Colección pública</span>
+                <span>Historias registradas · {storyCount}</span>
               </div>
             </div>
           </div>
@@ -66,7 +67,7 @@ export default async function HomePage() {
         <FadeIn>
           <div className="codex-library-heading mb-10 text-center">
             <div>
-              <p className="text-[0.66rem] font-semibold uppercase tracking-[0.36em] text-[#8A2A45]">
+              <p className="text-[0.66rem] font-semibold uppercase tracking-[0.38em] text-[#8A2A45]">
                 Selección del archivo
               </p>
               <h2 className="codex-serif mt-3 text-3xl font-semibold text-[#F1E9E0] md:text-4xl">
