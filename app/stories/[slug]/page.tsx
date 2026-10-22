@@ -5,6 +5,8 @@ import { getThemeDefinition } from "@/lib/theme-registry";
 import { StoryThemeScope } from "@/components/layout/ThemeRuntime";
 import { StoryPresentation } from "@/components/story/presentations/StoryPresentation";
 
+export const dynamic = "force-dynamic";
+
 type StoryPageProps = {
   params: Promise<{
     slug: string;
@@ -19,11 +21,11 @@ export default async function StoryPage({ params }: StoryPageProps) {
     notFound();
   }
 
-  const theme = getThemeDefinition(story.theme?.id);
+  const theme = getThemeDefinition(story.theme.id);
 
   return (
     <>
-      <StoryThemeScope themeKey={story.theme?.id} />
+      <StoryThemeScope themeKey={story.theme.id} />
 
       <main className={`${theme.pageClass} story-page px-6 py-20`}>
         <section className="mx-auto max-w-5xl">
@@ -54,10 +56,6 @@ export default async function StoryPage({ params }: StoryPageProps) {
                     <h3 className="codex-serif mt-1 text-xl font-semibold text-[var(--story-text)]">
                       {chapter.title}
                     </h3>
-
-                    <p className="story-muted mt-2 text-sm">
-                      {chapter.description}
-                    </p>
                   </Link>
                 ))}
               </div>

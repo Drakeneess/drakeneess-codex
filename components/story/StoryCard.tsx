@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import type { Story } from "../../lib/stories";
+import type { StorySummary } from "../../lib/stories";
 
 type StoryCardProps = {
-  story: Story;
+  story: StorySummary;
 };
 
 export function StoryCard({ story }: StoryCardProps) {
@@ -54,32 +54,17 @@ export function StoryCard({ story }: StoryCardProps) {
         <div className="relative z-10">
           <div className="mb-5 flex items-center justify-between gap-3">
             <span className="rounded-full border border-[#8A2A45]/40 bg-[#6E1F35]/15 px-3 py-1 text-xs uppercase tracking-[0.2em] text-[#D86A89]">
-              {story.status}
+              Publicado
             </span>
-
-            <span className="text-xs text-[#A99CA3]">{story.format}</span>
           </div>
 
           <h2 className="codex-serif text-2xl font-semibold text-[#F1E9E0] transition group-hover:text-[#D86A89]">
             {story.title}
           </h2>
 
-          <p className="mt-2 text-sm text-[#A99CA3]">{story.subtitle}</p>
-
           <p className="mt-5 line-clamp-3 text-sm leading-6 text-[#D8CBD0]">
             {story.description}
           </p>
-
-          <div className="mt-6 flex flex-wrap gap-2">
-            {story.genre.map((genre) => (
-              <span
-                key={genre}
-                className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-[#A99CA3]"
-              >
-                {genre}
-              </span>
-            ))}
-          </div>
         </div>
       </Link>
     </motion.div>

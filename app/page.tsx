@@ -5,6 +5,8 @@ import { FadeIn } from "../components/motion/FadeIn";
 import { StaggerContainer } from "../components/motion/StaggerContainer";
 import { StaggerItem } from "../components/motion/StaggerItem";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const stories = await getStories();
 
