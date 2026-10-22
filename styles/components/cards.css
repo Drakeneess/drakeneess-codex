@@ -15,3 +15,88 @@
     0 0 36px rgba(110, 31, 53, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.07);
 }
+
+.codex-folio-card {
+  position: relative;
+  min-height: 18rem;
+  overflow: hidden;
+  border: 1px solid rgba(216, 213, 207, 0.13);
+  background:
+    linear-gradient(150deg, rgba(255, 255, 255, 0.035), transparent 35%),
+    linear-gradient(180deg, rgba(20, 16, 23, 0.78), rgba(7, 7, 10, 0.88));
+  box-shadow:
+    0 22px 60px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px rgba(110, 31, 53, 0.08);
+  transition:
+    border-color 240ms ease,
+    box-shadow 240ms ease,
+    transform 240ms ease;
+}
+
+.codex-folio-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4.5rem;
+  height: 1px;
+  background: var(--codex-wine-soft);
+  box-shadow: 0 0 20px rgba(138, 42, 69, 0.35);
+}
+
+.codex-folio-card::after {
+  content: "";
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-right: 1px solid rgba(216, 213, 207, 0.16);
+  border-bottom: 1px solid rgba(216, 213, 207, 0.16);
+}
+
+.codex-folio-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(138, 42, 69, 0.56);
+  box-shadow:
+    0 28px 72px rgba(0, 0, 0, 0.38),
+    0 0 32px rgba(110, 31, 53, 0.1),
+    inset 0 0 0 1px rgba(216, 213, 207, 0.04);
+}
+
+.codex-folio-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--codex-wine-bright);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.codex-folio-label::before {
+  content: "";
+  width: 0.4rem;
+  height: 0.4rem;
+  border: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.codex-folio-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--codex-platinum-muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition:
+    color 220ms ease,
+    gap 220ms ease;
+}
+
+.group:hover .codex-folio-arrow {
+  gap: 0.8rem;
+  color: var(--codex-platinum);
+}
