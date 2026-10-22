@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getStoryBySlug } from "@/lib/stories";
-import { getStoryTheme } from "@/lib/story-themes";
+import { getThemeDefinition } from "@/lib/theme-registry";
 import { StoryPresentation } from "@/components/story/presentations/StoryPresentation";
 
 type StoryPageProps = {
@@ -18,7 +18,7 @@ export default async function StoryPage({ params }: StoryPageProps) {
     notFound();
   }
 
-  const theme = getStoryTheme(story.theme?.id);
+  const theme = getThemeDefinition(story.theme?.id);
 
   return (
     <main className={`${theme.pageClass} story-page px-6 py-20`}>
