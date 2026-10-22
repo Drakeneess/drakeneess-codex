@@ -52,7 +52,7 @@ export function CodexHeroInteractive({
               aria-expanded={unsealed}
               aria-controls="codex-seal-revelation"
               aria-describedby="codex-seal-instruction"
-              aria-label={unsealed ? "Cerrar el sello del archivo" : "Abrir el sello del archivo"}
+              aria-label={unsealed ? "Cerrar el registro del archivo" : "Abrir el registro del archivo"}
               onClick={() => setUnsealed((value) => !value)}
               whileTap={reduceMotion ? undefined : { scale: 0.92, rotate: -2 }}
             >
@@ -63,14 +63,14 @@ export function CodexHeroInteractive({
 
             <span id="codex-seal-instruction" className="codex-seal-instruction">
               <span className="codex-seal-instruction-dot" aria-hidden="true" />
-              {unsealed ? "Cerrar el sello" : "Abrir el sello"}
+              {unsealed ? "Cerrar registro" : "Abrir registro"}
             </span>
           </div>
 
           <span className="codex-seal-rail codex-seal-rail-right" aria-hidden="true" />
         </div>
 
-        <p className="codex-ceremonial-kicker mt-5">Archivo interactivo de historias</p>
+        <p className="codex-ceremonial-kicker mt-5">Archivo digital de historias</p>
 
         <h1 className="codex-serif platinum-title mx-auto mt-5 max-w-[11ch] text-5xl font-bold leading-[0.92] tracking-[-0.045em] sm:text-6xl md:text-7xl lg:text-[6.3rem]">
           The Drakeneess Codex
@@ -90,14 +90,14 @@ export function CodexHeroInteractive({
               exit={reduceMotion ? { opacity: 0 } : { opacity: 0, height: 0, scaleY: 0.9 }}
               transition={{ duration: reduceMotion ? 0 : 0.34, ease: [0.22, 1, 0.36, 1] }}
             >
-              <p className="codex-seal-whisper">El archivo reconoce al visitante.</p>
+              <p className="codex-seal-whisper">Información del archivo</p>
               <div className="codex-seal-grid">
                 <span>
                   <small>Estado</small>
-                  {archiveAvailable ? "Archivo enlazado" : "Enlace en espera"}
+                  {archiveAvailable ? "Archivo conectado" : "Conexión pendiente"}
                 </span>
                 <span>
-                  <small>Registros</small>
+                  <small>Historias</small>
                   {storyCount}
                 </span>
                 <span>
@@ -110,23 +110,22 @@ export function CodexHeroInteractive({
         </AnimatePresence>
 
         <p className="codex-ceremonial-lede mx-auto mt-7 max-w-3xl">
-          Un códice digital para relatos, mundos y archivos que esperan ser abiertos con más
-          curiosidad que prudencia. Cada obra conserva aquí su propia voz, atmósfera y forma de
-          lectura.
+          Una biblioteca digital para reunir historias, mundos y documentos de The Darkest Advance.
+          Cada obra mantiene su propia presentación, atmósfera y forma de lectura.
         </p>
 
         <div className="mt-9 flex flex-wrap justify-center gap-4">
           <Link href="/stories" className="codex-ritual-action codex-ritual-action-primary">
-            Explorar historias
+            Ver historias
           </Link>
 
           <Link href="/archive" className="codex-ritual-action codex-ritual-action-secondary">
-            Entrar al archivo
+            Consultar archivo
           </Link>
         </div>
 
         <div className="codex-hero-ledger mx-auto mt-10 max-w-4xl">
-          <span>Índice / raíz</span>
+          <span>Inicio / índice</span>
           <span>Colección pública</span>
           <span>Historias registradas · {storyCount}</span>
         </div>
