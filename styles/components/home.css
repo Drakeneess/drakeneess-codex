@@ -1,12 +1,19 @@
 /* Home: gothic ceremonial archive composition. */
 
 .codex-ceremonial-hero {
+  --codex-pointer-x: 50%;
+  --codex-pointer-y: 8%;
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(216, 213, 207, 0.16);
   border-radius: 2rem;
   background:
-    radial-gradient(circle at 50% -10%, rgba(138, 42, 69, 0.2), transparent 30rem),
+    radial-gradient(
+      circle at var(--codex-pointer-x) var(--codex-pointer-y),
+      rgba(176, 58, 90, 0.12),
+      transparent 17rem
+    ),
+    radial-gradient(circle at 50% -10%, rgba(138, 42, 69, 0.18), transparent 30rem),
     linear-gradient(135deg, rgba(255, 255, 255, 0.035), transparent 38%),
     rgba(10, 9, 13, 0.78);
   box-shadow:
@@ -23,6 +30,7 @@
   pointer-events: none;
   border: 1px solid rgba(216, 213, 207, 0.07);
   border-radius: 1.45rem;
+  transition: border-color 320ms ease, box-shadow 320ms ease;
 }
 
 .codex-ceremonial-hero::after {
@@ -43,6 +51,11 @@
   mix-blend-mode: screen;
 }
 
+.codex-ceremonial-hero.is-unsealed::before {
+  border-color: rgba(176, 58, 90, 0.18);
+  box-shadow: inset 0 0 55px rgba(110, 31, 53, 0.07);
+}
+
 .codex-hero-corner {
   position: absolute;
   z-index: 2;
@@ -50,6 +63,7 @@
   height: 3.6rem;
   pointer-events: none;
   border-color: rgba(216, 213, 207, 0.34);
+  transition: border-color 320ms ease, transform 320ms ease;
 }
 
 .codex-hero-corner::before {
@@ -59,6 +73,7 @@
   height: 1.1rem;
   border: 1px solid rgba(138, 42, 69, 0.45);
   transform: rotate(45deg);
+  transition: border-color 320ms ease, transform 320ms ease;
 }
 
 .codex-hero-corner-tl {
@@ -85,6 +100,15 @@
   bottom: 0.45rem;
 }
 
+.codex-ceremonial-hero.is-unsealed .codex-hero-corner {
+  border-color: rgba(216, 213, 207, 0.48);
+}
+
+.codex-ceremonial-hero.is-unsealed .codex-hero-corner::before {
+  border-color: rgba(176, 58, 90, 0.72);
+  transform: rotate(135deg);
+}
+
 .codex-hero-sigil {
   position: relative;
   display: grid;
@@ -108,6 +132,7 @@
   inset: 0.65rem;
   border: 1px solid rgba(138, 42, 69, 0.4);
   transform: rotate(45deg);
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), border-color 320ms ease;
 }
 
 .codex-hero-sigil::after {
@@ -115,7 +140,47 @@
   border-color: rgba(216, 213, 207, 0.2);
 }
 
-.codex-hero-sigil span {
+.codex-hero-sigil-button {
+  appearance: none;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+  transition:
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 260ms ease,
+    box-shadow 260ms ease,
+    background-color 260ms ease;
+}
+
+.codex-hero-sigil-button:hover {
+  transform: translateY(-2px) scale(1.035);
+  border-color: rgba(216, 213, 207, 0.5);
+  box-shadow:
+    0 0 0 0.7rem rgba(110, 31, 53, 0.07),
+    0 0 46px rgba(138, 42, 69, 0.3);
+}
+
+.codex-hero-sigil-button:focus-visible {
+  outline: 1px solid rgba(229, 217, 210, 0.78);
+  outline-offset: 0.45rem;
+}
+
+.codex-sigil-orbit {
+  position: absolute;
+  inset: -0.62rem;
+  border: 1px dashed rgba(176, 58, 90, 0.32);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+.codex-hero-sigil-button:hover .codex-sigil-orbit,
+.codex-ceremonial-hero.is-unsealed .codex-sigil-orbit {
+  opacity: 1;
+  animation: codex-sigil-orbit 16s linear infinite;
+}
+
+.codex-sigil-mark {
   position: relative;
   z-index: 2;
   color: var(--codex-platinum);
@@ -123,6 +188,38 @@
   font-size: 1.35rem;
   font-weight: 700;
   line-height: 1;
+  transition: color 260ms ease, text-shadow 260ms ease;
+}
+
+.codex-ceremonial-hero.is-unsealed .codex-hero-sigil-button {
+  border-color: rgba(176, 58, 90, 0.72);
+  background:
+    radial-gradient(circle, rgba(176, 58, 90, 0.24) 0 34%, transparent 35%),
+    rgba(12, 8, 13, 0.72);
+  box-shadow:
+    0 0 0 0.7rem rgba(110, 31, 53, 0.08),
+    0 0 50px rgba(138, 42, 69, 0.32);
+}
+
+.codex-ceremonial-hero.is-unsealed .codex-hero-sigil::before {
+  transform: rotate(135deg);
+  border-color: rgba(176, 58, 90, 0.72);
+}
+
+.codex-ceremonial-hero.is-unsealed .codex-hero-sigil::after {
+  transform: rotate(-45deg);
+  border-color: rgba(216, 213, 207, 0.36);
+}
+
+.codex-ceremonial-hero.is-unsealed .codex-sigil-mark {
+  color: #f1e9e0;
+  text-shadow: 0 0 24px rgba(229, 217, 210, 0.28);
+}
+
+@keyframes codex-sigil-orbit {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .codex-ceremonial-kicker {
@@ -164,6 +261,49 @@
   letter-spacing: 0.38em;
   text-transform: uppercase;
   text-shadow: 0 0 18px rgba(216, 213, 207, 0.1);
+}
+
+.codex-seal-revelation {
+  overflow: hidden;
+  border-top: 1px solid rgba(176, 58, 90, 0.32);
+  border-bottom: 1px solid rgba(216, 213, 207, 0.08);
+  background: linear-gradient(90deg, transparent, rgba(110, 31, 53, 0.08), transparent);
+}
+
+.codex-seal-whisper {
+  padding-top: 0.9rem;
+  color: var(--codex-wine-bright);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.68rem;
+  font-style: italic;
+  letter-spacing: 0.18em;
+}
+
+.codex-seal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 0.85rem;
+  padding-bottom: 0.95rem;
+}
+
+.codex-seal-grid > span {
+  padding: 0.25rem 1rem;
+  color: var(--codex-platinum-soft);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.codex-seal-grid > span + span {
+  border-left: 1px solid rgba(138, 42, 69, 0.28);
+}
+
+.codex-seal-grid small {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #6f676b;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
 }
 
 .codex-ceremonial-lede {
@@ -250,6 +390,12 @@
   font-size: 0.61rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+  transition: color 220ms ease, background-color 220ms ease;
+}
+
+.codex-hero-ledger span:hover {
+  color: var(--codex-platinum-soft);
+  background: rgba(110, 31, 53, 0.06);
 }
 
 .codex-hero-ledger span + span::before {
@@ -319,8 +465,14 @@
     letter-spacing: 0.32em;
   }
 
+  .codex-seal-grid,
   .codex-hero-ledger {
     grid-template-columns: 1fr;
+  }
+
+  .codex-seal-grid > span + span {
+    border-top: 1px solid rgba(138, 42, 69, 0.22);
+    border-left: 0;
   }
 
   .codex-hero-ledger span + span::before {
@@ -339,5 +491,20 @@
   .codex-library-heading::before,
   .codex-library-heading::after {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .codex-hero-sigil-button,
+  .codex-hero-sigil::before,
+  .codex-hero-sigil::after,
+  .codex-hero-corner,
+  .codex-hero-corner::before,
+  .codex-ritual-action {
+    transition-duration: 0.01ms;
+  }
+
+  .codex-sigil-orbit {
+    animation: none !important;
   }
 }
