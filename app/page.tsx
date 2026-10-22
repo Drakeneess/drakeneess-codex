@@ -10,63 +10,68 @@ export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const { stories, unavailable } = await getStoryCatalogState();
+  const storyCount = unavailable ? "—" : String(stories.length).padStart(2, "0");
 
   return (
-    <main className="px-6">
-      <section className="mx-auto flex min-h-[78vh] max-w-7xl items-center py-20">
-        <FadeIn className="w-full">
-          <div className="victorian-frame relative w-full rounded-[2rem] p-8 md:p-14">
-            <div className="mx-auto max-w-5xl text-center">
-              <p className="mb-5 text-xs uppercase tracking-[0.55em] text-[#8A2A45]">
-                Archivo interactivo de historias
-              </p>
+    <main className="px-4 pb-24 sm:px-6">
+      <section className="mx-auto max-w-7xl pt-10 md:pt-16">
+        <FadeIn>
+          <div className="codex-home-hero px-6 py-12 md:px-12 md:py-16 lg:px-16 lg:py-20">
+            <div className="relative z-10 grid items-center gap-14 lg:grid-cols-[1.25fr_0.75fr] lg:gap-20">
+              <div>
+                <p className="codex-home-kicker">Archivo narrativo</p>
 
-              <h1 className="codex-serif platinum-title text-5xl font-bold tracking-tight md:text-8xl">
-                The Drakeneess Codex
-              </h1>
+                <h1 className="codex-home-title codex-serif platinum-title mt-6 text-5xl font-bold leading-[0.94] tracking-[-0.04em] sm:text-6xl md:text-7xl lg:text-[5.7rem]">
+                  The Drakeneess Codex
+                </h1>
 
-              <div className="victorian-divider platinum-divider mx-auto my-8 max-w-3xl">
-                <span>Archivo</span>
+                <p className="codex-home-lede mt-8">
+                  Un archivo vivo para historias, mundos y documentos que no están hechos
+                  para dormirse en una carpeta. Aquí cada obra conserva su propia voz,
+                  atmósfera y forma de lectura.
+                </p>
+
+                <div className="mt-10 flex flex-wrap gap-3">
+                  <Link href="/stories" className="codex-action-primary">
+                    Explorar historias
+                  </Link>
+
+                  <Link href="/archive" className="codex-action-secondary">
+                    Entrar al archivo
+                  </Link>
+                </div>
               </div>
 
-              <p className="mx-auto max-w-2xl text-lg leading-8 text-[#A99CA3]">
-                Un códice digital para relatos, mundos y archivos que esperan ser abiertos
-                con más curiosidad que prudencia.
-              </p>
+              <div className="codex-index-plate flex flex-col items-center justify-between p-8 md:p-10">
+                <div className="codex-index-meta">
+                  <p className="codex-index-rule">Índice / raíz</p>
+                  <p className="codex-index-rule">Colección pública</p>
+                </div>
 
-              <div className="mt-10 flex flex-wrap justify-center gap-4">
-                <Link
-                  href="/stories"
-                  className="victorian-button rounded-full px-7 py-3 text-sm font-semibold transition hover:scale-105"
-                >
-                  <span className="relative z-10">Explorar historias</span>
-                </Link>
+                <div className="codex-index-seal" aria-hidden="true">
+                  <span className="codex-index-seal-mark">D</span>
+                </div>
 
-                <Link
-                  href="/archive"
-                  className="rounded-full border border-[#8A2A45]/50 bg-[#141017]/70 px-7 py-3 text-sm font-semibold text-[#F1E9E0] transition hover:border-[#D8D5CF]/35 hover:text-[#D86A89]"
-                >
-                  Entrar al archivo
-                </Link>
+                <div className="codex-index-meta">
+                  <p className="codex-index-rule">Historias registradas · {storyCount}</p>
+                  <p className="codex-index-rule">Lectura / archivo / códice</p>
+                </div>
               </div>
             </div>
           </div>
         </FadeIn>
       </section>
 
-      <section className="mx-auto max-w-7xl pb-24">
+      <section className="mx-auto mt-20 max-w-7xl md:mt-28">
         <FadeIn>
-          <div className="mb-8 text-center">
-            <p className="text-xs uppercase tracking-[0.42em] text-[#8A2A45]">
-              Destacadas
-            </p>
-
-            <h2 className="codex-serif mt-3 text-4xl font-semibold text-[#F1E9E0]">
-              Historias principales
-            </h2>
-
-            <div className="victorian-divider mx-auto mt-6 max-w-xl">
-              <span>Mundos</span>
+          <div className="codex-library-heading mb-10 text-center">
+            <div>
+              <p className="text-[0.66rem] font-semibold uppercase tracking-[0.36em] text-[#8A2A45]">
+                Selección del archivo
+              </p>
+              <h2 className="codex-serif mt-3 text-3xl font-semibold text-[#F1E9E0] md:text-4xl">
+                Historias principales
+              </h2>
             </div>
           </div>
         </FadeIn>
