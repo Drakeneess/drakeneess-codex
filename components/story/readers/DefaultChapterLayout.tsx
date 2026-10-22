@@ -1,11 +1,12 @@
 import Link from "next/link";
-import type { Story } from "@/lib/stories";
-
-type Chapter = Story["chapters"][number];
+import type {
+  StoryChapter,
+  StorySummary,
+} from "@/lib/stories";
 
 type DefaultChapterLayoutProps = {
-  story: Story;
-  chapter: Chapter;
+  story: StorySummary;
+  chapter: StoryChapter;
   children: React.ReactNode;
 };
 
