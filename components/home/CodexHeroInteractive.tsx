@@ -114,7 +114,7 @@ export function CodexHeroInteractive({
           Cada obra mantiene su propia presentación, atmósfera y forma de lectura.
         </p>
 
-        <div className="mt-9 flex flex-wrap justify-center gap-4">
+        <div className="codex-hero-actions mt-9">
           <Link href="/stories" className="codex-ritual-action codex-ritual-action-primary">
             Ver historias
           </Link>
