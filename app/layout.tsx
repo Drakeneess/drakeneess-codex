@@ -4,6 +4,7 @@ import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
 import { PageTransition } from "../components/navigation/PageTransition";
 import { AnimatedThemeBackground } from "../components/layout/AnimatedThemeBackground";
+import { ThemeRuntimeProvider } from "../components/layout/ThemeRuntime";
 
 export const metadata: Metadata = {
   title: "The Drakeneess Codex",
@@ -18,17 +19,19 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="min-h-screen font-sans antialiased">
-        <AnimatedThemeBackground />
+        <ThemeRuntimeProvider>
+          <AnimatedThemeBackground />
 
-        <div className="min-h-screen">
-          <Navbar />
+          <div className="min-h-screen">
+            <Navbar />
 
-          <PageTransition>
-            <main>{children}</main>
-          </PageTransition>
+            <PageTransition>
+              <main>{children}</main>
+            </PageTransition>
 
-          <Footer />
-        </div>
+            <Footer />
+          </div>
+        </ThemeRuntimeProvider>
       </body>
     </html>
   );
