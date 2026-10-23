@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getChapterBySlug } from "@/lib/stories";
 import { getThemeDefinition } from "@/lib/theme-registry";
 import { StoryThemeScope } from "@/components/layout/ThemeRuntime";
+import { RemoteMdx } from "@/components/mdx/RemoteMdx";
 import { StoryChapterLayout } from "@/components/story/readers/StoryChapterLayout";
 
 export const dynamic = "force-dynamic";
@@ -29,9 +30,7 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
 
       <main className={`${theme.readerClass} story-page px-6 py-16`}>
         <StoryChapterLayout story={result.story} chapter={result.chapter}>
-          <div className="whitespace-pre-wrap leading-8 text-[#D8D0C1]">
-            {result.chapter.content}
-          </div>
+          <RemoteMdx source={result.chapter.content} />
         </StoryChapterLayout>
       </main>
     </>
