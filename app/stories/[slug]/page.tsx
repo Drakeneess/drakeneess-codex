@@ -26,7 +26,7 @@ export default async function StoryPage({ params }: StoryPageProps) {
   }
 
   const theme = getThemeDefinition(story.theme.id);
-  const visualStyle = getStoryVisualStyle(story.visuals);
+  const visualStyle = getStoryVisualStyle(story.theme.id, story.visuals);
   const textureClass = getStoryTextureClass(story.visuals.textureKey);
 
   return (
