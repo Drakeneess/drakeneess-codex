@@ -4,6 +4,12 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import type { PointerEvent } from "react";
 import type { StorySummary } from "../../lib/stories";
+import {
+  getStoryOrnament,
+  getStoryStatusLabel,
+  getStoryTextureClass,
+  getStoryVisualStyle,
+} from "@/lib/story-profile";
 
 type StoryCardProps = {
   story: StorySummary;
@@ -12,6 +18,10 @@ type StoryCardProps = {
 export function StoryCard({ story }: StoryCardProps) {
   const publishedYear = story.publishedAt.slice(0, 4);
   const reduceMotion = useReducedMotion();
+  const ornament = getStoryOrnament(story.visuals.ornamentKey);
+  const textureClass = getStoryTextureClass(story.visuals.textureKey);
+  const visualStyle = getStoryVisualStyle(story.visuals);
+  const statusLabel = getStoryStatusLabel(story.profile.status);
 
   const handlePointerMove = (event: PointerEvent<HTMLAnchorElement>) => {
     if (reduceMotion) return;
@@ -41,31 +51,69 @@ export function StoryCard({ story }: StoryCardProps) {
     >
       <Link
         href={`/stories/${story.slug}`}
-        className="group codex-folio-card flex h-full flex-col p-6 md:p-7"
+        className={`group codex-folio-card story-visual-scope ${textureClass} flex h-full flex-col p-6 md:p-7`}
+        style={visualStyle}
         onPointerMove={handlePointerMove}
         onPointerLeave={handlePointerLeave}
       >
+        {story.assets.coverImageUrl && (
+          <div className="codex-folio-cover" aria-hidden="true">
+            <img src={story.assets.coverImageUrl} alt="" />
+          </div>
+        )}
+
         <div className="relative z-10 flex h-full flex-col">
           <div className="flex items-start justify-between gap-4">
-            <span className="codex-folio-label">Registro publicado</span>
-            <span
-              className="codex-serif text-4xl leading-none text-[#D8D5CF]/12 transition duration-300 group-hover:text-[#8A2A45]/45"
-              aria-hidden="true"
-            >
-              §
-            </span>
+            <div>
+              <span className="codex-folio-label">{statusLabel}</span>
+
+              {story.profile.authorName && (
+                <span className="codex-folio-author">{story.profile.authorName}</span>
+              )}
+            </div>
+
+            {ornament && (
+              <span
+                className="story-display-font text-4xl leading-none text-[var(--story-accent-soft)]/15 transition duration-300 group-hover:text-[var(--story-accent)]/55"
+                aria-hidden="true"
+              >
+                {ornament}
+              </span>
+            )}
           </div>
 
           <div className="mt-10 flex-1">
-            <h2 className="codex-serif max-w-[14ch] text-3xl font-semibold leading-tight text-[#F1E9E0] transition duration-300 group-hover:text-[#E9DDE1]">
+            {story.assets.logoImageUrl && (
+              <img
+                src={story.assets.logoImageUrl}
+                alt=""
+                className="codex-folio-logo"
+              />
+            )}
+
+            <h2 className="story-display-font max-w-[14ch] text-3xl font-semibold leading-tight text-[var(--story-text)] transition duration-300 group-hover:text-[var(--story-accent-soft)]">
               {story.title}
             </h2>
 
-            <div className="mt-4 h-px w-16 bg-gradient-to-r from-[#8A2A45]/70 to-transparent" />
+            {story.profile.subtitle && (
+              <p className="mt-2 text-xs uppercase tracking-[0.2em] text-[var(--story-accent-soft)]/70">
+                {story.profile.subtitle}
+              </p>
+            )}
 
-            <p className="mt-5 line-clamp-4 max-w-[34rem] text-sm leading-7 text-[#B8ABB1]">
+            <div className="mt-4 h-px w-16 bg-gradient-to-r from-[var(--story-accent)]/70 to-transparent" />
+
+            <p className="story-body-font mt-5 line-clamp-4 max-w-[34rem] text-sm leading-7 text-[var(--story-muted)]">
               {story.description}
             </p>
+
+            {story.profile.genres.length > 0 && (
+              <div className="codex-folio-genres mt-5">
+                {story.profile.genres.slice(0, 3).map((genre) => (
+                  <span key={genre}>{genre}</span>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="mt-10 flex items-end justify-between gap-4 border-t border-white/[0.07] pt-4">
