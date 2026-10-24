@@ -23,13 +23,15 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
   }
 
   const theme = getThemeDefinition(result.story.theme.id);
+  const readerPriorityClass =
+    theme.chapterLayout === "fossil" ? "" : "reader-priority-zone";
 
   return (
     <>
       <StoryThemeScope themeKey={result.story.theme.id} />
 
       <main
-        className={`${theme.readerClass} story-page reader-priority-zone px-6 py-16`}
+        className={`${theme.readerClass} story-page ${readerPriorityClass} px-4 py-4 md:px-6 md:py-6`}
       >
         <StoryChapterLayout story={result.story} chapter={result.chapter}>
           <RemoteMdx source={result.chapter.content} />
