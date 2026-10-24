@@ -1,19 +1,32 @@
 .story-page {
   min-height: 100vh;
-  background: var(--story-bg);
+  background:
+    radial-gradient(
+      circle at 12% 0%,
+      color-mix(in srgb, var(--story-accent) 12%, transparent),
+      transparent 28rem
+    ),
+    var(--story-bg);
   color: var(--story-text);
 }
 
 .story-frame {
-  border: 1px solid var(--story-accent);
-  background: var(--story-panel);
+  border: 1px solid color-mix(in srgb, var(--story-accent) 34%, transparent);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.025), transparent 46%),
+    var(--story-panel);
+  box-shadow:
+    0 20px 56px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
   color: var(--story-text);
 }
 
 .story-reader {
-  border: 1px solid var(--story-accent);
+  border: 1px solid color-mix(in srgb, var(--story-accent) 32%, transparent);
   background: var(--story-panel);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.2);
   color: var(--story-text);
+  contain: paint;
 }
 
 .story-muted {
