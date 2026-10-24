@@ -28,7 +28,9 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
     <>
       <StoryThemeScope themeKey={result.story.theme.id} />
 
-      <main className={`${theme.readerClass} story-page px-6 py-16`}>
+      <main
+        className={`${theme.readerClass} story-page reader-priority-zone px-6 py-16`}
+      >
         <StoryChapterLayout story={result.story} chapter={result.chapter}>
           <RemoteMdx source={result.chapter.content} />
         </StoryChapterLayout>
