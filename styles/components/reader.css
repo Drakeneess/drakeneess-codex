@@ -56,6 +56,7 @@ body:has(.reader-priority-zone) .site-main {
 .reader-priority-zone .reader-shell {
   height: clamp(28rem, 72dvh, 56rem);
   grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
   border: 1px solid color-mix(in srgb, var(--story-accent) 40%, transparent);
   border-radius: 1.1rem;
   background: var(--story-panel);
@@ -67,6 +68,8 @@ body:has(.reader-priority-zone) .site-main {
 
 .reader-priority-zone .reader-rail {
   position: relative;
+  min-height: 0;
+  overflow: hidden;
   border-bottom: 1px solid color-mix(in srgb, var(--story-accent) 24%, transparent);
   background:
     linear-gradient(
@@ -91,9 +94,11 @@ body:has(.reader-priority-zone) .site-main {
 }
 
 .reader-priority-zone .reader-reading-area {
-  display: flex;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-width: 0;
   min-height: 0;
-  flex-direction: column;
+  height: 100%;
   overflow: hidden;
   background:
     radial-gradient(
@@ -111,20 +116,24 @@ body:has(.reader-priority-zone) .site-main {
 }
 
 .reader-priority-zone .reader-shell-header {
-  flex: 0 0 auto;
+  min-height: 0;
   border-bottom: 1px solid color-mix(in srgb, var(--story-accent) 18%, transparent);
   background: color-mix(in srgb, var(--story-panel) 91%, black 9%);
 }
 
 .reader-priority-zone .story-reader {
-  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
   border: 0;
   background: transparent;
   box-shadow: none;
 }
 
 .reader-priority-zone .reader-scroll {
+  min-width: 0;
   min-height: 0;
+  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-gutter: stable;
@@ -159,6 +168,7 @@ body:has(.reader-priority-zone) .site-main {
 @media (min-width: 900px) {
   .reader-priority-zone .reader-shell {
     grid-template-columns: clamp(14rem, 20vw, 18rem) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
   }
 
   .reader-priority-zone .reader-rail {
@@ -168,6 +178,10 @@ body:has(.reader-priority-zone) .site-main {
 
   .reader-priority-zone .reader-rail-meta {
     display: block;
+  }
+
+  .reader-priority-zone .reader-reading-area {
+    grid-template-rows: minmax(0, 1fr);
   }
 
   .reader-priority-zone .reader-shell-header {
