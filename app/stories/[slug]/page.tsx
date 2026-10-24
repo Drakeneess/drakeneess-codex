@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getStoryBySlug } from "@/lib/stories";
@@ -16,6 +17,94 @@ type StoryPageProps = {
     slug: string;
   }>;
 };
+
+function getStoryDescription(
+  title: string,
+  description: string,
+  subtitle: string,
+) {
+  return (
+    description.trim() ||
+    subtitle.trim() ||
+    `${title} en The Drakeneess Codex.`
+  );
+}
+
+export async function generateMetadata({
+  params,
+}: StoryPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const story = await getStoryBySlug(slug);
+
+  if (!story) {
+    return {
+      title: "Historia no encontrada | The Drakeneess Codex",
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
+  }
+
+  const description = getStoryDescription(
+    story.title,
+    story.description,
+    story.profile.subtitle,
+  );
+  const socialImage =
+    story.assets.heroImageUrl ??
+    story.assets.coverImageUrl;
+  const keywords = Array.from(
+    new Set([
+      ...story.profile.genres,
+      ...story.profile.tags,
+    ]),
+  );
+  const canonical = `/stories/${story.slug}`;
+
+  return {
+    title: `${story.title} | The Drakeneess Codex`,
+    description,
+    alternates: {
+      canonical,
+    },
+    keywords: keywords.length > 0 ? keywords : undefined,
+    authors: story.profile.authorName
+      ? [
+          {
+            name: story.profile.authorName,
+          },
+        ]
+      : undefined,
+    openGraph: {
+      type: "article",
+      url: canonical,
+      siteName: "The Drakeneess Codex",
+      title: story.title,
+      description,
+      publishedTime: story.publishedAt,
+      modifiedTime: story.updatedAt,
+      authors: story.profile.authorName
+        ? [story.profile.authorName]
+        : undefined,
+      tags: keywords.length > 0 ? keywords : undefined,
+      images: socialImage
+        ? [
+            {
+              url: socialImage,
+              alt: `${story.title} — imagen editorial`,
+            },
+          ]
+        : undefined,
+    },
+    twitter: {
+      card: socialImage ? "summary_large_image" : "summary",
+      title: story.title,
+      description,
+      images: socialImage ? [socialImage] : undefined,
+    },
+  };
+}
 
 export default async function StoryPage({ params }: StoryPageProps) {
   const { slug } = await params;
