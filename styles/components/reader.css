@@ -53,6 +53,23 @@
   contain: paint;
 }
 
+.reader-priority-zone .remote-mdx-chunk {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 36rem;
+}
+
+.reader-priority-zone .remote-mdx-chunk + .remote-mdx-chunk {
+  margin-top: 1.25rem;
+}
+
+.reader-priority-zone .remote-mdx-chunk > :first-child {
+  margin-top: 0;
+}
+
+.reader-priority-zone .remote-mdx-chunk > :last-child {
+  margin-bottom: 0;
+}
+
 .story-muted {
   color: var(--story-muted);
 }
