@@ -1,0 +1,244 @@
+.story-visual-scope {
+  --story-bg: #07070a;
+  --story-panel: #141017;
+  --story-text: #f1e9e0;
+  --story-muted: #a99ca3;
+  --story-accent: #8a2a45;
+  --story-accent-soft: #d8d5cf;
+  --story-display-font: Georgia, "Times New Roman", serif;
+  --story-body-font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --story-reader-width: 56rem;
+}
+
+.story-display-font {
+  font-family: var(--story-display-font, Georgia, "Times New Roman", serif);
+}
+
+.story-body-font {
+  font-family: var(
+    --story-body-font,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif
+  );
+}
+
+.story-texture-grain {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.012) 0,
+      rgba(255, 255, 255, 0.012) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+}
+
+.story-texture-paper {
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.025), transparent 24rem),
+    radial-gradient(circle at 80% 80%, rgba(0, 0, 0, 0.12), transparent 28rem);
+}
+
+.story-texture-scanlines {
+  background-image:
+    repeating-linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.016) 0,
+      rgba(255, 255, 255, 0.016) 1px,
+      transparent 1px,
+      transparent 5px
+    );
+}
+
+.story-visual-scope.codex-folio-card {
+  border-color: color-mix(in srgb, var(--story-accent-soft) 14%, transparent);
+  background:
+    radial-gradient(
+      circle at var(--folio-x) var(--folio-y),
+      color-mix(in srgb, var(--story-accent-soft) 7%, transparent),
+      transparent 9rem
+    ),
+    radial-gradient(
+      circle at 100% 0%,
+      color-mix(in srgb, var(--story-accent) 16%, transparent),
+      transparent 13rem
+    ),
+    linear-gradient(150deg, rgba(255, 255, 255, 0.035), transparent 35%),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--story-panel) 82%, transparent),
+      color-mix(in srgb, var(--story-bg) 92%, transparent)
+    );
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.34),
+    inset 0 0 0 1px color-mix(in srgb, var(--story-accent) 9%, transparent);
+}
+
+.story-visual-scope.codex-folio-card::after {
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in srgb, var(--story-accent) 78%, transparent) 18%,
+    color-mix(in srgb, var(--story-accent-soft) 14%, transparent) 50%,
+    color-mix(in srgb, var(--story-accent) 58%, transparent) 82%,
+    transparent
+  );
+  box-shadow:
+    0 0 20px
+    color-mix(in srgb, var(--story-accent) 18%, transparent);
+}
+
+.story-visual-scope .codex-folio-label {
+  color: var(--story-accent);
+}
+
+.codex-folio-cover {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.codex-folio-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(7, 7, 10, 0.95) 0%, rgba(7, 7, 10, 0.76) 54%, rgba(7, 7, 10, 0.88) 100%),
+    linear-gradient(180deg, transparent 0%, rgba(7, 7, 10, 0.82) 100%);
+}
+
+.codex-folio-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.34;
+  transform: scale(1.03);
+}
+
+.codex-folio-author {
+  display: block;
+  margin-top: 0.45rem;
+  color: var(--story-muted);
+  font-size: 0.68rem;
+}
+
+.codex-folio-logo {
+  width: auto;
+  max-width: 9rem;
+  max-height: 2.4rem;
+  margin-bottom: 1rem;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.codex-folio-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.codex-folio-genres span,
+.story-profile-chip {
+  border: 1px solid color-mix(in srgb, var(--story-accent) 30%, transparent);
+  border-radius: 999px;
+  padding: 0.22rem 0.5rem;
+  color: var(--story-accent-soft);
+  background: color-mix(in srgb, var(--story-accent) 8%, transparent);
+  font-size: 0.62rem;
+  line-height: 1.2;
+}
+
+.story-profile-hero {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--story-accent) 34%, transparent);
+  border-radius: 1.75rem;
+  background: var(--story-panel);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+}
+
+.story-profile-hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.34;
+}
+
+.story-profile-hero-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--story-bg) 96%, transparent) 0%, color-mix(in srgb, var(--story-bg) 78%, transparent) 55%, color-mix(in srgb, var(--story-bg) 90%, transparent) 100%),
+    linear-gradient(180deg, transparent 40%, color-mix(in srgb, var(--story-bg) 92%, transparent));
+}
+
+.story-profile-hero-content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  min-height: 22rem;
+  padding: 2rem;
+}
+
+.story-profile-cover {
+  width: 9rem;
+  aspect-ratio: 2 / 3;
+  border: 1px solid color-mix(in srgb, var(--story-accent-soft) 18%, transparent);
+  border-radius: 0.9rem;
+  object-fit: cover;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.42);
+}
+
+.story-profile-logo {
+  width: auto;
+  max-width: min(20rem, 70vw);
+  max-height: 4rem;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.story-profile-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1rem;
+  color: var(--story-muted);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+}
+
+.story-profile-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.story-profile-tag {
+  color: var(--story-muted);
+  font-size: 0.7rem;
+}
+
+.story-profile-tag::before {
+  content: "#";
+  color: var(--story-accent);
+}
+
+@media (min-width: 720px) {
+  .story-profile-hero-content.has-cover {
+    grid-template-columns: 10rem minmax(0, 1fr);
+    align-items: center;
+  }
+
+  .story-profile-cover {
+    width: 10rem;
+  }
+}
