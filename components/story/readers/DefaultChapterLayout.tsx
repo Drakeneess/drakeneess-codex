@@ -18,7 +18,10 @@ export function DefaultChapterLayout({
   return (
     <article className="mx-auto max-w-3xl">
       <div className="mb-10">
-        <Link href={`/stories/${story.slug}`} className="story-accent text-sm">
+        <Link
+          href={`/stories/${story.slug}`}
+          className="story-accent text-sm transition-colors duration-200 hover:text-[var(--story-text)]"
+        >
           ← Volver a {story.title}
         </Link>
 
@@ -27,7 +30,7 @@ export function DefaultChapterLayout({
         </p>
       </div>
 
-      <div className="story-reader p-6 md:p-10">
+      <div className="story-reader rounded-3xl p-6 md:p-10">
         {children}
       </div>
     </article>
