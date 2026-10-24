@@ -7,28 +7,178 @@
   --story-accent-soft: #c9b27c;
 }
 
-.theme-fossil .fossil-prose {
+.fossil-reader-shell {
   color: var(--story-text);
+}
+
+.fossil-reader-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--story-accent) 24%, transparent);
+}
+
+.fossil-reader-back {
+  color: color-mix(in srgb, var(--story-accent-soft) 82%, transparent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+}
+
+.fossil-reader-back:hover {
+  color: var(--story-text);
+}
+
+.fossil-reader-heading-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.fossil-reader-story-label,
+.fossil-reader-record-label,
+.fossil-preservation-label,
+.fossil-reader-watermark {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  text-transform: uppercase;
+}
+
+.fossil-reader-story-label {
+  color: var(--story-accent);
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+}
+
+.fossil-reader-title {
+  margin-top: 0.5rem;
+  color: var(--story-text);
+  font-size: clamp(1.5rem, 3vw, 1.9rem);
+  font-weight: 600;
+}
+
+.fossil-reader-record-label {
+  color: var(--story-muted);
+  font-size: 0.625rem;
+  letter-spacing: 0.28em;
+}
+
+.fossil-reader-panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--story-accent) 30%, transparent);
+  border-radius: 1.75rem;
+  background:
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--story-accent) 13%, transparent),
+      transparent 24rem
+    ),
+    radial-gradient(
+      circle at bottom right,
+      color-mix(in srgb, var(--story-accent-soft) 8%, transparent),
+      transparent 22rem
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--story-panel) 94%, black 6%),
+      var(--story-panel)
+    );
+  box-shadow:
+    0 26px 70px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+.fossil-reader-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.012) 0,
+      rgba(255, 255, 255, 0.012) 1px,
+      transparent 1px,
+      transparent 5px
+    );
+}
+
+.fossil-reader-watermark {
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+  z-index: 1;
+  color: color-mix(in srgb, var(--story-accent-soft) 38%, transparent);
+  font-size: 0.625rem;
+  letter-spacing: 0.35em;
+}
+
+.fossil-reader-content {
+  position: relative;
+  z-index: 1;
+  padding: 1.5rem;
+}
+
+.fossil-preservation-note {
+  max-width: var(--story-reader-width, 56rem);
+  margin: 0 auto 2rem;
+  border: 1px solid color-mix(in srgb, var(--story-accent-soft) 12%, transparent);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  background: color-mix(in srgb, var(--story-panel) 86%, black 14%);
+}
+
+.fossil-preservation-label {
+  margin: 0;
+  color: var(--story-accent);
+  font-size: 0.625rem;
+  letter-spacing: 0.3em;
+}
+
+.fossil-preservation-note p:last-child {
+  margin: 0.75rem 0 0;
+  color: var(--story-muted);
+  font-size: 0.875rem;
+  line-height: 1.75;
+}
+
+.theme-fossil .fossil-prose {
+  width: 100%;
+  max-width: var(--story-reader-width, 56rem);
+  margin-inline: auto;
+  color: var(--story-text);
+  font-family: var(
+    --story-body-font,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif
+  );
 }
 
 .theme-fossil .fossil-prose h1,
 .theme-fossil .fossil-prose h2,
-.theme-fossil .fossil-prose h3 {
-  color: #eee8dc;
+.theme-fossil .fossil-prose h3,
+.theme-fossil .fossil-prose h4 {
+  color: var(--story-text);
+  font-family: var(--story-display-font, Georgia, "Times New Roman", serif);
   font-weight: 600;
 }
 
 .theme-fossil .fossil-prose p {
-  color: #c8c0aa;
+  color: color-mix(in srgb, var(--story-text) 78%, var(--story-muted) 22%);
   line-height: 2;
 }
 
 .theme-fossil .fossil-prose strong {
-  color: #eee8dc;
+  color: var(--story-text);
 }
 
 .theme-fossil .fossil-prose em {
-  color: #c9b27c;
+  color: var(--story-accent-soft);
 }
 
 .theme-fossil .fossil-prose hr {
@@ -38,8 +188,20 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(113, 140, 90, 0.55),
-    rgba(201, 178, 124, 0.24),
+    color-mix(in srgb, var(--story-accent) 55%, transparent),
+    color-mix(in srgb, var(--story-accent-soft) 24%, transparent),
     transparent
   );
+}
+
+@media (min-width: 768px) {
+  .fossil-reader-heading-row {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .fossil-reader-content {
+    padding: 2.5rem;
+  }
 }
