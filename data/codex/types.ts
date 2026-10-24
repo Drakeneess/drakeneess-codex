@@ -34,6 +34,7 @@ export interface PublicStorySummary {
   profile?: PublicStoryProfile;
   assets?: PublicStoryAssets;
   visuals?: PublicStoryVisuals;
+  chapterCount?: number;
   publishedAt: string;
   updatedAt: string;
 }
