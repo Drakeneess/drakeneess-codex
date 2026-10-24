@@ -4,8 +4,10 @@ export type StoryChapterLayoutId = "default" | "fossil";
 export type ThemeVisuals = {
   bg: string;
   panel: string;
-  glow: string;
-  glowSoft: string;
+  text: string;
+  muted: string;
+  accent: string;
+  accentSoft: string;
 };
 
 export type ThemeDefinition = {
@@ -18,6 +20,9 @@ export type ThemeDefinition = {
 
 export const DEFAULT_STORY_THEME_KEY = "codex" as const;
 
+const DEFAULT_TEXT = "#F1E9E0";
+const DEFAULT_MUTED = "#A99CA3";
+
 export const themeRegistry = {
   codex: {
     pageClass: "theme-codex",
@@ -27,8 +32,10 @@ export const themeRegistry = {
     visuals: {
       bg: "#07070A",
       panel: "#141017",
-      glow: "#6E1F35",
-      glowSoft: "#D8D5CF",
+      text: DEFAULT_TEXT,
+      muted: DEFAULT_MUTED,
+      accent: "#8A2A45",
+      accentSoft: "#D8D5CF",
     },
   },
 
@@ -40,8 +47,10 @@ export const themeRegistry = {
     visuals: {
       bg: "#080908",
       panel: "#12130F",
-      glow: "#718C5A",
-      glowSoft: "#C9B27C",
+      text: "#EEE8DC",
+      muted: "#A7A08F",
+      accent: "#718C5A",
+      accentSoft: "#C9B27C",
     },
   },
 
@@ -53,8 +62,10 @@ export const themeRegistry = {
     visuals: {
       bg: "#050608",
       panel: "#101116",
-      glow: "#7A1F2B",
-      glowSoft: "#D8D5CF",
+      text: DEFAULT_TEXT,
+      muted: DEFAULT_MUTED,
+      accent: "#7A1F2B",
+      accentSoft: "#D8D5CF",
     },
   },
 
@@ -66,8 +77,10 @@ export const themeRegistry = {
     visuals: {
       bg: "#05070A",
       panel: "#101720",
-      glow: "#2F6F9F",
-      glowSoft: "#D13B3B",
+      text: DEFAULT_TEXT,
+      muted: "#A6AFBA",
+      accent: "#2F6F9F",
+      accentSoft: "#D13B3B",
     },
   },
 
@@ -79,8 +92,10 @@ export const themeRegistry = {
     visuals: {
       bg: "#061016",
       panel: "#0D1B22",
-      glow: "#8FB8C8",
-      glowSoft: "#7F9C6A",
+      text: "#E7F0F2",
+      muted: "#A1B1B7",
+      accent: "#8FB8C8",
+      accentSoft: "#7F9C6A",
     },
   },
 
@@ -92,8 +107,10 @@ export const themeRegistry = {
     visuals: {
       bg: "#070912",
       panel: "#101525",
-      glow: "#7BBCE8",
-      glowSoft: "#B24A5B",
+      text: "#EEF3FA",
+      muted: "#A8B0C4",
+      accent: "#7BBCE8",
+      accentSoft: "#B24A5B",
     },
   },
 
@@ -105,8 +122,10 @@ export const themeRegistry = {
     visuals: {
       bg: "#080808",
       panel: "#151515",
-      glow: "#B52D2D",
-      glowSoft: "#2D6FB5",
+      text: "#F0F0F0",
+      muted: "#A9A9A9",
+      accent: "#B52D2D",
+      accentSoft: "#2D6FB5",
     },
   },
 } as const satisfies Record<string, ThemeDefinition>;
