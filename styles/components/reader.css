@@ -29,6 +29,7 @@
 }
 
 .reader-priority-zone {
+  min-height: auto;
   isolation: isolate;
   overflow-x: clip;
   background: var(--story-bg);
@@ -46,10 +47,14 @@
 }
 
 .reader-priority-zone .reader-shell {
-  height: clamp(24rem, 72dvh, 56rem);
+  height: clamp(28rem, 78dvh, 60rem);
   border: 1px solid color-mix(in srgb, var(--story-accent) 32%, transparent);
   background: var(--story-panel);
   contain: layout paint style;
+}
+
+.reader-priority-zone .reader-prose-column {
+  max-width: 48rem;
 }
 
 .reader-priority-zone .reader-shell-header {
