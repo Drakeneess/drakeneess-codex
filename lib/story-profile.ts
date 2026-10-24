@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import { getThemeDefinition } from "@/lib/theme-registry";
 
 export type StoryStatus = "ongoing" | "completed" | "hiatus";
 export type StoryReaderWidth = "narrow" | "standard" | "wide";
@@ -34,6 +35,8 @@ export interface StoryVisuals {
 type StoryVisualStyle = CSSProperties & {
   "--story-bg"?: string;
   "--story-panel"?: string;
+  "--story-text"?: string;
+  "--story-muted"?: string;
   "--story-accent"?: string;
   "--story-accent-soft"?: string;
   "--story-display-font"?: string;
@@ -215,8 +218,19 @@ function resolveFontFamily(key: string | null) {
   return FONT_REGISTRY[key as keyof typeof FONT_REGISTRY];
 }
 
-export function getStoryVisualStyle(visuals: StoryVisuals): StoryVisualStyle {
+export function getStoryVisualStyle(
+  themeKey: string,
+  visuals: StoryVisuals,
+): StoryVisualStyle {
+  const theme = getThemeDefinition(themeKey);
+
   const style: StoryVisualStyle = {
+    "--story-bg": theme.visuals.bg,
+    "--story-panel": theme.visuals.panel,
+    "--story-text": theme.visuals.text,
+    "--story-muted": theme.visuals.muted,
+    "--story-accent": theme.visuals.accent,
+    "--story-accent-soft": theme.visuals.accentSoft,
     "--story-reader-width": READER_WIDTH_REGISTRY[visuals.readerWidth],
   };
 
