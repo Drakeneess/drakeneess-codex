@@ -1,0 +1,140 @@
+.story-catalog-toolbar {
+  display: grid;
+  gap: 1rem;
+
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.025), transparent 44%),
+    rgba(15, 15, 20, 0.72);
+}
+
+.story-catalog-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.story-catalog-filter-grid label {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.story-catalog-filter-grid label > span {
+  color: #8f858a;
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.story-catalog-filter-grid select {
+  min-width: 0;
+  width: 100%;
+  min-height: 2.5rem;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.7rem;
+
+  padding: 0 0.75rem;
+
+  color: #e9e1da;
+  background: #111217;
+
+  font-size: 0.8rem;
+}
+
+.story-catalog-filter-grid select:focus {
+  outline: none;
+  border-color: rgba(138, 42, 69, 0.7);
+  box-shadow: 0 0 0 2px rgba(138, 42, 69, 0.13);
+}
+
+.story-catalog-filter-grid select:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.story-catalog-toolbar-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  padding-top: 0.8rem;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.story-catalog-toolbar-meta span {
+  color: #81777c;
+  font-size: 0.72rem;
+}
+
+.story-catalog-toolbar-meta button,
+.story-catalog-empty button {
+  border: 0;
+  padding: 0;
+
+  color: #b9657c;
+  background: transparent;
+
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.story-catalog-toolbar-meta button:hover,
+.story-catalog-empty button:hover {
+  color: #dc8da3;
+}
+
+.story-catalog-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.story-catalog-empty {
+  display: grid;
+  place-items: center;
+  gap: 0.8rem;
+
+  min-height: 14rem;
+
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+
+  padding: 2rem;
+
+  color: #a99ca3;
+  text-align: center;
+}
+
+.story-catalog-empty p {
+  margin: 0;
+}
+
+@media (min-width: 720px) {
+  .story-catalog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .story-catalog-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .story-catalog-filter-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .story-catalog-toolbar-meta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
