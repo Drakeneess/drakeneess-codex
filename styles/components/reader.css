@@ -26,6 +26,30 @@
   background: var(--story-panel);
   box-shadow: 0 16px 42px rgba(0, 0, 0, 0.2);
   color: var(--story-text);
+}
+
+.reader-priority-zone {
+  isolation: isolate;
+  contain: paint style;
+  overflow-x: clip;
+  background: var(--story-bg);
+  color: var(--story-text);
+}
+
+.reader-priority-zone,
+.reader-priority-zone * {
+  animation: none !important;
+  transition: none !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  mix-blend-mode: normal !important;
+  text-shadow: none !important;
+}
+
+.reader-priority-zone .story-reader,
+.reader-priority-zone .story-frame {
+  background: var(--story-panel);
+  box-shadow: none;
   contain: paint;
 }
 
