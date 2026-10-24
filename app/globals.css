@@ -2,13 +2,11 @@
 
 @import "../styles/base/tokens.css";
 @import "../styles/base/typography.css";
-@import "../styles/base/effects.css";
 @import "../styles/base/victorian.css";
 
 @import "../styles/components/buttons.css";
 @import "../styles/components/cards.css";
 @import "../styles/components/home.css";
-@import "../styles/components/home-interactive.css";
 @import "../styles/components/reader.css";
 
 @import "../styles/themes/codex.css";
@@ -19,47 +17,18 @@
 }
 
 html {
-  background: var(--codex-black);
+  background: #07070a;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
+  overflow-x: clip;
   background:
-    radial-gradient(circle at top left, rgba(110, 31, 53, 0.2), transparent 34rem),
-    radial-gradient(circle at bottom right, rgba(58, 13, 28, 0.3), transparent 30rem),
+    radial-gradient(circle at 12% 0%, rgba(110, 31, 53, 0.16), transparent 30rem),
+    radial-gradient(circle at 88% 100%, rgba(58, 13, 28, 0.18), transparent 32rem),
     linear-gradient(180deg, #07070a 0%, #0d0d12 52%, #07070a 100%);
   color: var(--codex-text);
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.45), transparent 75%);
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(138, 42, 69, 0.08), transparent 40rem),
-    repeating-linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.018) 0px,
-      rgba(255, 255, 255, 0.018) 1px,
-      transparent 1px,
-      transparent 4px
-    );
-  opacity: 0.45;
-  mix-blend-mode: screen;
 }
 
 a {
@@ -68,6 +37,6 @@ a {
 }
 
 ::selection {
-  background: rgba(138, 42, 69, 0.55);
+  background: rgba(138, 42, 69, 0.5);
   color: var(--codex-text);
 }

@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
@@ -15,17 +14,5 @@ export function PageTransition({ children }: PageTransitionProps) {
     window.scrollTo({ top: 0, behavior: "instant" });
   }, [pathname]);
 
-  return (
-    <motion.div
-      key={pathname}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{
-        duration: 2.3,
-        ease: "easeOut",
-      }}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div>{children}</div>;
 }
