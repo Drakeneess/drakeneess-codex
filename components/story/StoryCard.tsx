@@ -20,7 +20,7 @@ export function StoryCard({ story }: StoryCardProps) {
   const reduceMotion = useReducedMotion();
   const ornament = getStoryOrnament(story.visuals.ornamentKey);
   const textureClass = getStoryTextureClass(story.visuals.textureKey);
-  const visualStyle = getStoryVisualStyle(story.visuals);
+  const visualStyle = getStoryVisualStyle(story.theme.id, story.visuals);
   const statusLabel = getStoryStatusLabel(story.profile.status);
 
   const handlePointerMove = (event: PointerEvent<HTMLAnchorElement>) => {
