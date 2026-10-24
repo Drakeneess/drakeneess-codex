@@ -28,8 +28,15 @@
   color: var(--story-text);
 }
 
+body:has(.reader-priority-zone) .site-shell,
+body:has(.reader-priority-zone) .site-main {
+  min-height: 0 !important;
+  height: auto !important;
+}
+
 .reader-priority-zone {
-  min-height: auto;
+  min-height: 0 !important;
+  height: auto !important;
   isolation: isolate;
   overflow-x: clip;
   background: var(--story-bg);
