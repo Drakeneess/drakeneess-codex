@@ -54,70 +54,73 @@ body:has(.reader-priority-zone) .site-main {
 }
 
 .reader-priority-zone .reader-shell {
-  height: clamp(26rem, 70dvh, 54rem);
-  border: 1px solid color-mix(in srgb, var(--story-accent) 46%, transparent);
-  background:
-    linear-gradient(
-      135deg,
-      color-mix(in srgb, white 3%, transparent),
-      transparent 28%
-    ),
-    linear-gradient(
-      315deg,
-      color-mix(in srgb, var(--story-accent) 6%, transparent),
-      transparent 42%
-    ),
-    var(--story-panel);
+  height: clamp(28rem, 72dvh, 56rem);
+  grid-template-columns: minmax(0, 1fr);
+  border: 1px solid color-mix(in srgb, var(--story-accent) 40%, transparent);
+  border-radius: 1.1rem;
+  background: var(--story-panel);
   box-shadow:
-    0 26px 70px rgba(0, 0, 0, 0.34),
-    0 0 0 1px color-mix(in srgb, var(--story-accent) 8%, transparent),
-    inset 0 1px 0 rgba(255, 255, 255, 0.035),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+    0 24px 64px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
   contain: layout paint style;
 }
 
-.reader-priority-zone .reader-prose-column {
-  max-width: 44rem;
-}
-
-.reader-priority-zone .reader-shell-header {
-  border-bottom: 1px solid color-mix(in srgb, var(--story-accent) 26%, transparent);
+.reader-priority-zone .reader-rail {
+  position: relative;
+  border-bottom: 1px solid color-mix(in srgb, var(--story-accent) 24%, transparent);
   background:
     linear-gradient(
       180deg,
-      color-mix(in srgb, var(--story-accent) 8%, transparent),
-      transparent 75%
+      color-mix(in srgb, var(--story-accent) 9%, transparent),
+      transparent 55%
     ),
-    color-mix(in srgb, var(--story-panel) 88%, black 12%);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.025),
-    inset 0 -12px 24px rgba(0, 0, 0, 0.08);
+    color-mix(in srgb, var(--story-panel) 82%, black 18%);
+}
+
+.reader-priority-zone .reader-rail-meta {
+  display: none;
+}
+
+.reader-priority-zone .reader-rail-rule {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--story-accent) 56%, transparent),
+    transparent
+  );
+}
+
+.reader-priority-zone .reader-reading-area {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 14% 0%,
+      color-mix(in srgb, var(--story-accent) 5%, transparent),
+      transparent 28rem
+    ),
+    color-mix(in srgb, var(--story-panel) 97%, white 3%);
+}
+
+.reader-priority-zone .reader-prose-column {
+  width: 100%;
+  max-width: 56rem;
+  margin-inline: auto;
+}
+
+.reader-priority-zone .reader-shell-header {
+  flex: 0 0 auto;
+  border-bottom: 1px solid color-mix(in srgb, var(--story-accent) 18%, transparent);
+  background: color-mix(in srgb, var(--story-panel) 91%, black 9%);
 }
 
 .reader-priority-zone .story-reader {
+  flex: 1 1 auto;
   border: 0;
-  background:
-    radial-gradient(
-      circle at 18% 0%,
-      color-mix(in srgb, var(--story-accent) 7%, transparent),
-      transparent 25rem
-    ),
-    radial-gradient(
-      circle at 92% 100%,
-      color-mix(in srgb, var(--story-accent-soft) 3%, transparent),
-      transparent 24rem
-    ),
-    repeating-linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.009) 0,
-      rgba(255, 255, 255, 0.009) 1px,
-      transparent 1px,
-      transparent 5px
-    ),
-    color-mix(in srgb, var(--story-panel) 96%, white 4%);
-  box-shadow:
-    inset 0 18px 30px rgba(0, 0, 0, 0.08),
-    inset 0 -24px 36px rgba(0, 0, 0, 0.12);
+  background: transparent;
+  box-shadow: none;
 }
 
 .reader-priority-zone .reader-scroll {
@@ -151,6 +154,25 @@ body:has(.reader-priority-zone) .site-main {
 
 .reader-priority-zone .remote-mdx-chunk {
   display: contents;
+}
+
+@media (min-width: 900px) {
+  .reader-priority-zone .reader-shell {
+    grid-template-columns: clamp(14rem, 20vw, 18rem) minmax(0, 1fr);
+  }
+
+  .reader-priority-zone .reader-rail {
+    border-right: 1px solid color-mix(in srgb, var(--story-accent) 24%, transparent);
+    border-bottom: 0;
+  }
+
+  .reader-priority-zone .reader-rail-meta {
+    display: block;
+  }
+
+  .reader-priority-zone .reader-shell-header {
+    display: none;
+  }
 }
 
 .story-muted {
