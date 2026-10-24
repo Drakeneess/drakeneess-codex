@@ -18,9 +18,9 @@ export default function RootLayout({
     <html lang="es">
       <body className="min-h-screen font-sans antialiased">
         <ThemeRuntimeProvider>
-          <div className="min-h-screen">
+          <div className="site-shell min-h-screen">
             <Navbar />
-            <main>{children}</main>
+            <main className="site-main">{children}</main>
             <Footer />
           </div>
         </ThemeRuntimeProvider>
