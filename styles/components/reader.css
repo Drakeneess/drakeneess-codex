@@ -28,32 +28,9 @@
   color: var(--story-text);
 }
 
-body:has(.reader-priority-zone) {
-  overflow: hidden;
-}
-
-body:has(.reader-priority-zone) .site-shell {
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
-  height: 100dvh;
-  min-height: 0;
-  overflow: hidden;
-}
-
-body:has(.reader-priority-zone) .site-main {
-  min-height: 0;
-  overflow: hidden;
-}
-
-body:has(.reader-priority-zone) .site-shell > footer {
-  display: none;
-}
-
 .reader-priority-zone {
-  height: 100%;
-  min-height: 0;
-  overflow: hidden;
   isolation: isolate;
+  overflow-x: clip;
   background: var(--story-bg);
   color: var(--story-text);
 }
@@ -69,7 +46,7 @@ body:has(.reader-priority-zone) .site-shell > footer {
 }
 
 .reader-priority-zone .reader-shell {
-  min-height: 0;
+  height: clamp(24rem, 72dvh, 56rem);
   border: 1px solid color-mix(in srgb, var(--story-accent) 32%, transparent);
   background: var(--story-panel);
   contain: layout paint style;
@@ -90,7 +67,6 @@ body:has(.reader-priority-zone) .site-shell > footer {
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  overscroll-behavior: contain;
   scrollbar-gutter: stable;
   contain: layout paint style;
 }
