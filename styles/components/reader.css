@@ -111,7 +111,7 @@ body:has(.reader-priority-zone) .site-main {
 
 .reader-priority-zone .reader-prose-column {
   width: 100%;
-  max-width: 56rem;
+  max-width: var(--story-reader-width, 56rem);
   margin-inline: auto;
 }
 
@@ -159,6 +159,13 @@ body:has(.reader-priority-zone) .site-main {
 
 .reader-priority-zone .reader-scroll::-webkit-scrollbar-thumb:hover {
   background: color-mix(in srgb, var(--story-accent) 78%, #8d848c 22%);
+}
+
+.reader-priority-zone .story-reader h1,
+.reader-priority-zone .story-reader h2,
+.reader-priority-zone .story-reader h3,
+.reader-priority-zone .story-reader h4 {
+  font-family: var(--story-display-font, Georgia, "Times New Roman", serif);
 }
 
 .reader-priority-zone .remote-mdx-chunk {
