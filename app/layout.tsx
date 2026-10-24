@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
-import { PageTransition } from "../components/navigation/PageTransition";
-import { AnimatedThemeBackground } from "../components/layout/AnimatedThemeBackground";
 import { ThemeRuntimeProvider } from "../components/layout/ThemeRuntime";
 
 export const metadata: Metadata = {
@@ -20,15 +18,9 @@ export default function RootLayout({
     <html lang="es">
       <body className="min-h-screen font-sans antialiased">
         <ThemeRuntimeProvider>
-          <AnimatedThemeBackground />
-
           <div className="min-h-screen">
             <Navbar />
-
-            <PageTransition>
-              <main>{children}</main>
-            </PageTransition>
-
+            <main>{children}</main>
             <Footer />
           </div>
         </ThemeRuntimeProvider>
