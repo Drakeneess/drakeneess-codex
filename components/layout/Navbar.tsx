@@ -13,7 +13,7 @@ const navItems = [
 export function Navbar() {
   return (
     <motion.header
-      className="sticky top-0 z-50 border-b border-[#6E1F35]/30 bg-[#07070A]/88 backdrop-blur-xl"
+      className="z-50 border-b border-[#6E1F35]/30 bg-[#07070A]/88"
       initial={{ opacity: 0, y: -18 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
