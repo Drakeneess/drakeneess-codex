@@ -2,6 +2,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getStoryBySlug } from "@/lib/stories";
 import { getThemeDefinition } from "@/lib/theme-registry";
+import {
+  getStoryTextureClass,
+  getStoryVisualStyle,
+} from "@/lib/story-profile";
 import { StoryThemeScope } from "@/components/layout/ThemeRuntime";
 import { StoryPresentation } from "@/components/story/presentations/StoryPresentation";
 
@@ -22,22 +26,27 @@ export default async function StoryPage({ params }: StoryPageProps) {
   }
 
   const theme = getThemeDefinition(story.theme.id);
+  const visualStyle = getStoryVisualStyle(story.visuals);
+  const textureClass = getStoryTextureClass(story.visuals.textureKey);
 
   return (
     <>
       <StoryThemeScope themeKey={story.theme.id} />
 
-      <main className={`${theme.pageClass} story-page px-6 py-20`}>
+      <main
+        className={`${theme.pageClass} story-page story-visual-scope ${textureClass} px-6 py-20`}
+        style={visualStyle}
+      >
         <section className="mx-auto max-w-5xl">
           <StoryPresentation story={story} />
 
           <section className="mt-12">
-            <h2 className="codex-serif text-2xl font-semibold text-[var(--story-text)]">
+            <h2 className="story-display-font text-2xl font-semibold text-[var(--story-text)]">
               Capítulos
             </h2>
 
             {story.chapters.length === 0 ? (
-              <p className="story-muted mt-4">
+              <p className="story-body-font story-muted mt-4">
                 Aún no hay capítulos publicados en esta sección. El archivo está
                 respirando, que es una forma elegante de decir “todavía no”.
               </p>
@@ -53,7 +62,7 @@ export default async function StoryPage({ params }: StoryPageProps) {
                       Capítulo {chapter.number}
                     </p>
 
-                    <h3 className="codex-serif mt-1 text-xl font-semibold text-[var(--story-text)]">
+                    <h3 className="story-display-font mt-1 text-xl font-semibold text-[var(--story-text)]">
                       {chapter.title}
                     </h3>
                   </Link>
