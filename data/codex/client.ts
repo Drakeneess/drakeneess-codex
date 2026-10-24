@@ -5,7 +5,10 @@ import type {
   PublicChapterResult,
   PublicChapterSummary,
   PublicStory,
+  PublicStoryAssets,
+  PublicStoryProfile,
   PublicStorySummary,
+  PublicStoryVisuals,
 } from "./types";
 
 export class PublicCodexConfigError extends Error {
@@ -68,8 +71,66 @@ function isString(value: unknown): value is string {
   return typeof value === "string";
 }
 
+function isNullableString(value: unknown): value is string | null {
+  return value === null || isString(value);
+}
+
+function isStringArray(value: unknown): value is string[] {
+  return Array.isArray(value) && value.every(isString);
+}
+
 function isNumber(value: unknown): value is number {
   return typeof value === "number" && Number.isFinite(value);
+}
+
+function isStoryProfile(value: unknown): value is PublicStoryProfile {
+  if (!isRecord(value)) {
+    return false;
+  }
+
+  return (
+    isString(value.subtitle) &&
+    isString(value.authorName) &&
+    (value.status === "ongoing" ||
+      value.status === "completed" ||
+      value.status === "hiatus") &&
+    isString(value.language) &&
+    isStringArray(value.genres) &&
+    isStringArray(value.tags) &&
+    isNullableString(value.contentRating)
+  );
+}
+
+function isStoryAssets(value: unknown): value is PublicStoryAssets {
+  if (!isRecord(value)) {
+    return false;
+  }
+
+  return (
+    isNullableString(value.coverImageUrl) &&
+    isNullableString(value.heroImageUrl) &&
+    isNullableString(value.logoImageUrl)
+  );
+}
+
+function isStoryVisuals(value: unknown): value is PublicStoryVisuals {
+  if (!isRecord(value)) {
+    return false;
+  }
+
+  return (
+    isNullableString(value.accent) &&
+    isNullableString(value.accentSoft) &&
+    isNullableString(value.background) &&
+    isNullableString(value.panel) &&
+    isNullableString(value.displayFontKey) &&
+    isNullableString(value.bodyFontKey) &&
+    isNullableString(value.ornamentKey) &&
+    isNullableString(value.textureKey) &&
+    (value.readerWidth === "narrow" ||
+      value.readerWidth === "standard" ||
+      value.readerWidth === "wide")
+  );
 }
 
 function isStorySummary(value: unknown): value is PublicStorySummary {
@@ -77,11 +138,20 @@ function isStorySummary(value: unknown): value is PublicStorySummary {
     return false;
   }
 
+  const profileValid =
+    value.profile === undefined || isStoryProfile(value.profile);
+  const assetsValid = value.assets === undefined || isStoryAssets(value.assets);
+  const visualsValid =
+    value.visuals === undefined || isStoryVisuals(value.visuals);
+
   return (
     isString(value.slug) &&
     isString(value.title) &&
     isString(value.description) &&
     isString(value.themeKey) &&
+    profileValid &&
+    assetsValid &&
+    visualsValid &&
     isString(value.publishedAt) &&
     isString(value.updatedAt)
   );
