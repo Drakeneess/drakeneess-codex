@@ -22,6 +22,7 @@ export function StoryCard({ story }: StoryCardProps) {
   const textureClass = getStoryTextureClass(story.visuals.textureKey);
   const visualStyle = getStoryVisualStyle(story.theme.id, story.visuals);
   const statusLabel = getStoryStatusLabel(story.profile.status);
+  const chapterLabel = story.chapterCount === 1 ? "1 capítulo" : `${story.chapterCount} capítulos`;
 
   const handlePointerMove = (event: PointerEvent<HTMLAnchorElement>) => {
     if (reduceMotion) return;
@@ -115,7 +116,7 @@ export function StoryCard({ story }: StoryCardProps) {
 
           <div className="mt-10 flex items-end justify-between gap-4 border-t border-white/[0.07] pt-4">
             <span className="text-[0.62rem] uppercase tracking-[0.2em] text-[#6F676B]">
-              Publicado · {publishedYear}
+              {chapterLabel} · {publishedYear}
             </span>
             <span className="codex-folio-arrow">
               Abrir <span aria-hidden="true">→</span>
