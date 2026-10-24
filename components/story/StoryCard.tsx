@@ -73,10 +73,7 @@ export function StoryCard({ story }: StoryCardProps) {
             </div>
 
             {ornament && (
-              <span
-                className="story-display-font text-4xl leading-none text-[var(--story-accent-soft)]/15 transition duration-300 group-hover:text-[var(--story-accent)]/55"
-                aria-hidden="true"
-              >
+              <span className="codex-folio-ornament" aria-hidden="true">
                 {ornament}
               </span>
             )}
@@ -96,12 +93,12 @@ export function StoryCard({ story }: StoryCardProps) {
             </h2>
 
             {story.profile.subtitle && (
-              <p className="mt-2 text-xs uppercase tracking-[0.2em] text-[var(--story-accent-soft)]/70">
+              <p className="codex-folio-subtitle mt-2">
                 {story.profile.subtitle}
               </p>
             )}
 
-            <div className="mt-4 h-px w-16 bg-gradient-to-r from-[var(--story-accent)]/70 to-transparent" />
+            <div className="codex-folio-rule mt-4 h-px w-16" />
 
             <p className="story-body-font mt-5 line-clamp-4 max-w-[34rem] text-sm leading-7 text-[var(--story-muted)]">
               {story.description}
