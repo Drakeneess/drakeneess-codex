@@ -52,6 +52,7 @@ export interface StorySummary {
   profile: StoryProfile;
   assets: StoryAssets;
   visuals: StoryVisuals;
+  chapterCount: number;
   publishedAt: string;
   updatedAt: string;
 }
@@ -76,6 +77,10 @@ function mapStorySummary(story: PublicStorySummary): StorySummary {
     profile: normalizeStoryProfile(story.profile),
     assets: normalizeStoryAssets(story.assets),
     visuals: normalizeStoryVisuals(story.visuals),
+    chapterCount:
+      typeof story.chapterCount === "number"
+        ? story.chapterCount
+        : 0,
     publishedAt: story.publishedAt,
     updatedAt: story.updatedAt,
   };
@@ -101,6 +106,7 @@ function mapChapter(chapter: PublicChapter): StoryChapterContent {
 function mapStory(story: PublicStory): Story {
   return {
     ...mapStorySummary(story),
+    chapterCount: story.chapters.length,
     chapters: story.chapters.map(mapChapterSummary),
   };
 }
