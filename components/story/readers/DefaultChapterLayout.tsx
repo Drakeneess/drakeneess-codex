@@ -16,7 +16,7 @@ export function DefaultChapterLayout({
   children,
 }: DefaultChapterLayoutProps) {
   return (
-    <article className="reader-shell mx-auto flex h-full w-full max-w-3xl flex-col overflow-hidden rounded-3xl">
+    <article className="reader-shell mx-auto flex w-full max-w-3xl flex-col overflow-hidden rounded-3xl">
       <header className="reader-shell-header shrink-0 px-6 py-5 md:px-10 md:py-6">
         <Link
           href={`/stories/${story.slug}`}
