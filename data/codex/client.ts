@@ -83,6 +83,10 @@ function isNumber(value: unknown): value is number {
   return typeof value === "number" && Number.isFinite(value);
 }
 
+function isNonNegativeInteger(value: unknown): value is number {
+  return isNumber(value) && Number.isInteger(value) && value >= 0;
+}
+
 function isStoryProfile(value: unknown): value is PublicStoryProfile {
   if (!isRecord(value)) {
     return false;
@@ -143,6 +147,8 @@ function isStorySummary(value: unknown): value is PublicStorySummary {
   const assetsValid = value.assets === undefined || isStoryAssets(value.assets);
   const visualsValid =
     value.visuals === undefined || isStoryVisuals(value.visuals);
+  const chapterCountValid =
+    value.chapterCount === undefined || isNonNegativeInteger(value.chapterCount);
 
   return (
     isString(value.slug) &&
@@ -152,6 +158,7 @@ function isStorySummary(value: unknown): value is PublicStorySummary {
     profileValid &&
     assetsValid &&
     visualsValid &&
+    chapterCountValid &&
     isString(value.publishedAt) &&
     isString(value.updatedAt)
   );
