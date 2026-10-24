@@ -16,6 +16,18 @@ import type {
   PublicStorySummary,
 } from "@/data/codex/types";
 
+import {
+  normalizeStoryAssets,
+  normalizeStoryProfile,
+  normalizeStoryVisuals,
+} from "@/lib/story-profile";
+
+import type {
+  StoryAssets,
+  StoryProfile,
+  StoryVisuals,
+} from "@/lib/story-profile";
+
 export interface StoryTheme {
   id: string;
 }
@@ -37,6 +49,9 @@ export interface StorySummary {
   title: string;
   description: string;
   theme: StoryTheme;
+  profile: StoryProfile;
+  assets: StoryAssets;
+  visuals: StoryVisuals;
   publishedAt: string;
   updatedAt: string;
 }
@@ -58,6 +73,9 @@ function mapStorySummary(story: PublicStorySummary): StorySummary {
     theme: {
       id: story.themeKey,
     },
+    profile: normalizeStoryProfile(story.profile),
+    assets: normalizeStoryAssets(story.assets),
+    visuals: normalizeStoryVisuals(story.visuals),
     publishedAt: story.publishedAt,
     updatedAt: story.updatedAt,
   };
