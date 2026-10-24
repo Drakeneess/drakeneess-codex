@@ -56,7 +56,7 @@ body:has(.reader-priority-zone) .site-main {
 .reader-priority-zone .reader-shell {
   height: clamp(28rem, 72dvh, 56rem);
   grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
   border: 1px solid color-mix(in srgb, var(--story-accent) 40%, transparent);
   border-radius: 1.1rem;
   background: var(--story-panel);
@@ -172,6 +172,8 @@ body:has(.reader-priority-zone) .site-main {
   }
 
   .reader-priority-zone .reader-rail {
+    grid-column: 1;
+    grid-row: 1;
     border-right: 1px solid color-mix(in srgb, var(--story-accent) 24%, transparent);
     border-bottom: 0;
   }
@@ -181,6 +183,8 @@ body:has(.reader-priority-zone) .site-main {
   }
 
   .reader-priority-zone .reader-reading-area {
+    grid-column: 2;
+    grid-row: 1;
     grid-template-rows: minmax(0, 1fr);
   }
 
