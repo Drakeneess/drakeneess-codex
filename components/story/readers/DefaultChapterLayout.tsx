@@ -29,7 +29,7 @@ export function DefaultChapterLayout({
           <p className="story-muted text-xs uppercase tracking-[0.42em]">
             Historia
           </p>
-          <p className="codex-serif mt-2 text-xl text-[var(--story-text)]">
+          <p className="story-display-font mt-2 text-xl text-[var(--story-text)]">
             {story.title}
           </p>
 
@@ -53,7 +53,7 @@ export function DefaultChapterLayout({
           </div>
         </header>
 
-        <div className="story-reader reader-scroll min-h-0 overflow-y-auto px-6 md:px-10">
+        <div className="story-reader reader-scroll story-body-font min-h-0 overflow-y-auto px-6 md:px-10">
           <div className="reader-prose-column w-full pb-10 pt-7 md:pb-12 md:pt-8">
             {children}
           </div>
