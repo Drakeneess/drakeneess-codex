@@ -9,10 +9,10 @@ const footerLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-[#6E1F35]/30 px-6 py-10">
+    <footer className="border-t border-[#6E1F35]/30 bg-[#07070A]/72 px-6 py-10">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-8 border-b border-white/10 pb-4 text-sm text-[#A99CA3]">
-          Códice
+        <div className="victorian-divider mb-8">
+          <span>Códice</span>
         </div>
 
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
@@ -28,7 +28,11 @@ export function Footer() {
 
           <nav className="flex flex-wrap gap-4">
             {footerLinks.map((item) => (
-              <Link key={item.href} href={item.href} className="text-sm text-[#A99CA3]">
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-sm text-[#A99CA3] transition-colors duration-200 hover:text-[#D86A89]"
+              >
                 {item.label}
               </Link>
             ))}
