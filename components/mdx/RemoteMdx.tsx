@@ -8,6 +8,8 @@ const COMPONENT_REGISTRY = {
   NarratorSwitch,
 } as const;
 
+const READER_CHUNK_SIZE = 8;
+
 type LiteralAttributes = Record<string, string>;
 
 export class RemoteMdxError extends Error {
@@ -402,9 +404,29 @@ function renderRemoteMdx(source: string) {
   return renderBlocks(source.replace(/\r\n?/g, "\n").split("\n"));
 }
 
+function chunkBlocks(blocks: ReactNode[]) {
+  const chunks: ReactNode[][] = [];
+
+  for (let index = 0; index < blocks.length; index += READER_CHUNK_SIZE) {
+    chunks.push(blocks.slice(index, index + READER_CHUNK_SIZE));
+  }
+
+  return chunks;
+}
+
 export function RemoteMdx({ source }: { source: string }) {
   try {
-    return <div className="remote-mdx">{renderRemoteMdx(source)}</div>;
+    const chunks = chunkBlocks(renderRemoteMdx(source));
+
+    return (
+      <div className="remote-mdx">
+        {chunks.map((chunk, index) => (
+          <div className="remote-mdx-chunk" key={`remote-mdx-chunk-${index}`}>
+            {chunk}
+          </div>
+        ))}
+      </div>
+    );
   } catch (error) {
     console.error("[codex] Invalid remote MDX.", error);
 
