@@ -28,10 +28,32 @@
   color: var(--story-text);
 }
 
+body:has(.reader-priority-zone) {
+  overflow: hidden;
+}
+
+body:has(.reader-priority-zone) .site-shell {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+body:has(.reader-priority-zone) .site-main {
+  min-height: 0;
+  overflow: hidden;
+}
+
+body:has(.reader-priority-zone) .site-shell > footer {
+  display: none;
+}
+
 .reader-priority-zone {
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
   isolation: isolate;
-  contain: paint style;
-  overflow-x: clip;
   background: var(--story-bg);
   color: var(--story-text);
 }
@@ -46,16 +68,36 @@
   text-shadow: none !important;
 }
 
-.reader-priority-zone .story-reader,
-.reader-priority-zone .story-frame {
+.reader-priority-zone .reader-shell {
+  min-height: 0;
+  border: 1px solid color-mix(in srgb, var(--story-accent) 32%, transparent);
   background: var(--story-panel);
+  contain: layout paint style;
+}
+
+.reader-priority-zone .reader-shell-header {
+  border-bottom: 1px solid color-mix(in srgb, var(--story-accent) 18%, transparent);
+  background: var(--story-panel);
+}
+
+.reader-priority-zone .story-reader {
+  border: 0;
+  background: transparent;
   box-shadow: none;
-  contain: paint;
+}
+
+.reader-priority-zone .reader-scroll {
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  contain: layout paint style;
 }
 
 .reader-priority-zone .remote-mdx-chunk {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 36rem;
+  content-visibility: visible;
+  contain-intrinsic-size: none;
 }
 
 .reader-priority-zone .remote-mdx-chunk + .remote-mdx-chunk {
