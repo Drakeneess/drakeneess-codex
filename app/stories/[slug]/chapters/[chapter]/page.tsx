@@ -24,7 +24,10 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
   }
 
   const theme = getThemeDefinition(result.story.theme.id);
-  const visualStyle = getStoryVisualStyle(result.story.visuals);
+  const visualStyle = getStoryVisualStyle(
+    result.story.theme.id,
+    result.story.visuals,
+  );
   const readerPriorityClass =
     theme.chapterLayout === "fossil" ? "" : "reader-priority-zone";
 
