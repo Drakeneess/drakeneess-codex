@@ -23,10 +23,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Lint
-        run: npm run lint
-
       - name: Build
         run: npm run build
         env:
           CODEX_API_URL: https://thedarkestadvance-production.up.railway.app
+
+      - name: Lint
+        run: npm run lint
