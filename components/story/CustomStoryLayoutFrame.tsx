@@ -104,10 +104,6 @@ export function CustomStoryLayoutFrame({
     };
   }, [measure]);
 
-  useEffect(() => {
-    setHeight(MIN_FRAME_HEIGHT);
-  }, [srcDoc]);
-
   return (
     <iframe
       ref={frameRef}
