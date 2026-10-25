@@ -6,6 +6,7 @@ import type {
   PublicChapterSummary,
   PublicStory,
   PublicStoryAssets,
+  PublicStoryLayout,
   PublicStoryProfile,
   PublicStorySummary,
   PublicStoryVisuals,
@@ -137,6 +138,18 @@ function isStoryVisuals(value: unknown): value is PublicStoryVisuals {
   );
 }
 
+function isStoryLayout(value: unknown): value is PublicStoryLayout {
+  if (!isRecord(value)) {
+    return false;
+  }
+
+  return (
+    (value.mode === "preset" || value.mode === "custom") &&
+    isString(value.html) &&
+    isString(value.css)
+  );
+}
+
 function isStorySummary(value: unknown): value is PublicStorySummary {
   if (!isRecord(value)) {
     return false;
@@ -147,6 +160,8 @@ function isStorySummary(value: unknown): value is PublicStorySummary {
   const assetsValid = value.assets === undefined || isStoryAssets(value.assets);
   const visualsValid =
     value.visuals === undefined || isStoryVisuals(value.visuals);
+  const layoutValid =
+    value.layout === undefined || isStoryLayout(value.layout);
   const chapterCountValid =
     value.chapterCount === undefined || isNonNegativeInteger(value.chapterCount);
 
@@ -158,6 +173,7 @@ function isStorySummary(value: unknown): value is PublicStorySummary {
     profileValid &&
     assetsValid &&
     visualsValid &&
+    layoutValid &&
     chapterCountValid &&
     isString(value.publishedAt) &&
     isString(value.updatedAt)
