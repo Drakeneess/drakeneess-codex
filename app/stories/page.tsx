@@ -1,9 +1,7 @@
 import { getStoryCatalogState } from "@/lib/stories";
-import { StoryCard } from "@/components/story/StoryCard";
+import { StoryCatalog } from "@/components/story/StoryCatalog";
 import { StoryCatalogUnavailable } from "@/components/story/StoryCatalogUnavailable";
 import { FadeIn } from "@/components/motion/FadeIn";
-import { StaggerContainer } from "@/components/motion/StaggerContainer";
-import { StaggerItem } from "@/components/motion/StaggerItem";
 
 export const dynamic = "force-dynamic";
 
@@ -32,13 +30,7 @@ export default async function StoriesPage() {
           {unavailable ? (
             <StoryCatalogUnavailable />
           ) : (
-            <StaggerContainer className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {stories.map((story) => (
-                <StaggerItem key={story.slug}>
-                  <StoryCard story={story} />
-                </StaggerItem>
-              ))}
-            </StaggerContainer>
+            <StoryCatalog stories={stories} />
           )}
         </div>
       </section>

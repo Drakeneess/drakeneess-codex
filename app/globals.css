@@ -6,8 +6,10 @@
 
 @import "../styles/components/buttons.css";
 @import "../styles/components/cards.css";
+@import "../styles/components/catalog.css";
 @import "../styles/components/home.css";
 @import "../styles/components/reader.css";
+@import "../styles/components/story-profile.css";
 
 @import "../styles/themes/codex.css";
 @import "../styles/themes/fossil.css";

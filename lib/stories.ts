@@ -16,6 +16,18 @@ import type {
   PublicStorySummary,
 } from "@/data/codex/types";
 
+import {
+  normalizeStoryAssets,
+  normalizeStoryProfile,
+  normalizeStoryVisuals,
+} from "@/lib/story-profile";
+
+import type {
+  StoryAssets,
+  StoryProfile,
+  StoryVisuals,
+} from "@/lib/story-profile";
+
 export interface StoryTheme {
   id: string;
 }
@@ -37,6 +49,10 @@ export interface StorySummary {
   title: string;
   description: string;
   theme: StoryTheme;
+  profile: StoryProfile;
+  assets: StoryAssets;
+  visuals: StoryVisuals;
+  chapterCount: number;
   publishedAt: string;
   updatedAt: string;
 }
@@ -58,6 +74,13 @@ function mapStorySummary(story: PublicStorySummary): StorySummary {
     theme: {
       id: story.themeKey,
     },
+    profile: normalizeStoryProfile(story.profile),
+    assets: normalizeStoryAssets(story.assets),
+    visuals: normalizeStoryVisuals(story.visuals),
+    chapterCount:
+      typeof story.chapterCount === "number"
+        ? story.chapterCount
+        : 0,
     publishedAt: story.publishedAt,
     updatedAt: story.updatedAt,
   };
@@ -83,6 +106,7 @@ function mapChapter(chapter: PublicChapter): StoryChapterContent {
 function mapStory(story: PublicStory): Story {
   return {
     ...mapStorySummary(story),
+    chapterCount: story.chapters.length,
     chapters: story.chapters.map(mapChapterSummary),
   };
 }

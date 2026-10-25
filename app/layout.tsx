@@ -5,6 +5,7 @@ import { Footer } from "../components/layout/Footer";
 import { ThemeRuntimeProvider } from "../components/layout/ThemeRuntime";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://codex.thedarkestadvance.com"),
   title: "The Drakeneess Codex",
   description: "Un archivo vivo de historias imposibles.",
 };
