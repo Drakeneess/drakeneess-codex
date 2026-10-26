@@ -123,29 +123,33 @@ export default async function StoryPage({ params }: StoryPageProps) {
 
   const theme = getThemeDefinition(story.theme.id);
 
+  let customDocument: string | null = null;
+
   if (hasCustomStoryLayout(story.layout)) {
     try {
-      const customDocument =
+      customDocument =
         buildCustomStoryLayoutDocument(story);
-
-      return (
-        <>
-          <StoryThemeScope themeKey={story.theme.id} />
-
-          <main className={`${theme.pageClass} story-page min-h-screen overflow-x-hidden`}>
-            <CustomStoryLayoutFrame
-              title={`${story.title} — presentación personalizada`}
-              srcDoc={customDocument}
-            />
-          </main>
-        </>
-      );
     } catch (error) {
       console.error(
         "[codex] Custom story layout failed; falling back to preset presentation.",
         error,
       );
     }
+  }
+
+  if (customDocument) {
+    return (
+      <>
+        <StoryThemeScope themeKey={story.theme.id} />
+
+        <main className={`${theme.pageClass} story-page min-h-screen overflow-x-hidden`}>
+          <CustomStoryLayoutFrame
+            title={`${story.title} — presentación personalizada`}
+            srcDoc={customDocument}
+          />
+        </main>
+      </>
+    );
   }
 
   const visualStyle = getStoryVisualStyle(story.theme.id, story.visuals);
