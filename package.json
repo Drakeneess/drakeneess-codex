@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:layout": "node --experimental-strip-types --test lib/story-layout.test.mjs"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",
