@@ -26,6 +26,12 @@ export interface PublicStoryVisuals {
   readerWidth: "narrow" | "standard" | "wide";
 }
 
+export interface PublicStoryLayout {
+  mode: "preset" | "custom";
+  html: string;
+  css: string;
+}
+
 export interface PublicStorySummary {
   slug: string;
   title: string;
@@ -34,6 +40,7 @@ export interface PublicStorySummary {
   profile?: PublicStoryProfile;
   assets?: PublicStoryAssets;
   visuals?: PublicStoryVisuals;
+  layout?: PublicStoryLayout;
   chapterCount?: number;
   publishedAt: string;
   updatedAt: string;

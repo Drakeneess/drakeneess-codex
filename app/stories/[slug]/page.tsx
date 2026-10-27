@@ -7,7 +7,14 @@ import {
   getStoryTextureClass,
   getStoryVisualStyle,
 } from "@/lib/story-profile";
+import {
+  hasCustomStoryLayout,
+} from "@/lib/story-layout";
+import {
+  buildCustomStoryLayoutDocument,
+} from "@/lib/story-layout-document";
 import { StoryThemeScope } from "@/components/layout/ThemeRuntime";
+import { CustomStoryLayoutFrame } from "@/components/story/CustomStoryLayoutFrame";
 import { StoryPresentation } from "@/components/story/presentations/StoryPresentation";
 
 export const dynamic = "force-dynamic";
@@ -115,6 +122,36 @@ export default async function StoryPage({ params }: StoryPageProps) {
   }
 
   const theme = getThemeDefinition(story.theme.id);
+
+  let customDocument: string | null = null;
+
+  if (hasCustomStoryLayout(story.layout)) {
+    try {
+      customDocument =
+        buildCustomStoryLayoutDocument(story);
+    } catch (error) {
+      console.error(
+        "[codex] Custom story layout failed; falling back to preset presentation.",
+        error,
+      );
+    }
+  }
+
+  if (customDocument) {
+    return (
+      <>
+        <StoryThemeScope themeKey={story.theme.id} />
+
+        <main className={`${theme.pageClass} story-page min-h-screen overflow-x-hidden`}>
+          <CustomStoryLayoutFrame
+            title={`${story.title} — presentación personalizada`}
+            srcDoc={customDocument}
+          />
+        </main>
+      </>
+    );
+  }
+
   const visualStyle = getStoryVisualStyle(story.theme.id, story.visuals);
   const textureClass = getStoryTextureClass(story.visuals.textureKey);
 

@@ -28,6 +28,14 @@ import type {
   StoryVisuals,
 } from "@/lib/story-profile";
 
+import {
+  normalizeStoryCustomLayout,
+} from "@/lib/story-layout";
+
+import type {
+  StoryCustomLayout,
+} from "@/lib/story-layout";
+
 export interface StoryTheme {
   id: string;
 }
@@ -52,6 +60,7 @@ export interface StorySummary {
   profile: StoryProfile;
   assets: StoryAssets;
   visuals: StoryVisuals;
+  layout: StoryCustomLayout;
   chapterCount: number;
   publishedAt: string;
   updatedAt: string;
@@ -77,6 +86,7 @@ function mapStorySummary(story: PublicStorySummary): StorySummary {
     profile: normalizeStoryProfile(story.profile),
     assets: normalizeStoryAssets(story.assets),
     visuals: normalizeStoryVisuals(story.visuals),
+    layout: normalizeStoryCustomLayout(story.layout),
     chapterCount:
       typeof story.chapterCount === "number"
         ? story.chapterCount
