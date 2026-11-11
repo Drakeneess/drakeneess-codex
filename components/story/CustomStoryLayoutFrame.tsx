@@ -15,7 +15,20 @@ type CustomStoryLayoutFrameProps = {
 const MIN_FRAME_HEIGHT = 680;
 const MAX_FRAME_HEIGHT = 50_000;
 
-export function CustomStoryLayoutFrame({
+/**
+ * A changed published layout must get a fresh browsing context.
+ * Updating srcDoc on an existing iframe can otherwise leave observers or
+ * measurements tied to its previous document during client navigation.
+ */
+function getDocumentKey(srcDoc: string) {
+  let hash = 2166136261;
+  for (let index = 0; index < srcDoc.length; index += 1) {
+    hash = Math.imul(hash ^ srcDoc.charCodeAt(index), 16777619);
+  }
+  return `${srcDoc.length}-${hash >>> 0}`;
+}
+
+function CustomStoryLayoutFrameDocument({
   title,
   srcDoc,
 }: CustomStoryLayoutFrameProps) {
@@ -115,6 +128,15 @@ export function CustomStoryLayoutFrame({
       style={{
         height,
       }}
+    />
+  );
+}
+
+export function CustomStoryLayoutFrame(props: CustomStoryLayoutFrameProps) {
+  return (
+    <CustomStoryLayoutFrameDocument
+      key={getDocumentKey(props.srcDoc)}
+      {...props}
     />
   );
 }
