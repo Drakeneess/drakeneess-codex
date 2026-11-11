@@ -18,12 +18,19 @@ export function DefaultChapterLayout({
   return (
     <article className="reader-shell mx-auto grid w-full max-w-7xl overflow-hidden">
       <aside className="reader-rail px-6 py-5 md:px-8 md:py-7">
-        <Link
-          href={`/stories/${story.slug}`}
-          className="story-accent text-sm transition-colors duration-200 hover:text-[var(--story-text)]"
-        >
-          ← Volver a {story.title}
-        </Link>
+        <nav className="reader-local-nav" aria-label="Navegación de lectura">
+          <Link href="/" className="reader-codex-home">
+            <span className="reader-codex-sigil" aria-hidden="true">D</span>
+            <span>Volver al Códice</span>
+          </Link>
+
+          <Link
+            href={`/stories/${story.slug}`}
+            className="reader-story-back"
+          >
+            ← Volver a {story.title}
+          </Link>
+        </nav>
 
         <div className="reader-rail-meta mt-8">
           <p className="story-muted text-xs uppercase tracking-[0.42em]">
