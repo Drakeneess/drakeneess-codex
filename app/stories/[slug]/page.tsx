@@ -142,7 +142,7 @@ export default async function StoryPage({ params }: StoryPageProps) {
       <>
         <StoryThemeScope themeKey={story.theme.id} />
 
-        <main className={`${theme.pageClass} story-page custom-story-layout-host min-h-screen overflow-x-hidden`}>
+        <main className={`${theme.pageClass} story-page custom-story-layout-host`}>
           <CustomStoryLayoutFrame
             title={`${story.title} — presentación personalizada`}
             srcDoc={customDocument}
