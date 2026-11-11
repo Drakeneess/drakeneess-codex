@@ -86,3 +86,43 @@ body:has(.custom-story-layout-host) {
   height: 100%;
   border: 0;
 }
+
+
+/* A persistent escape route that is outside the untrusted story iframe.
+ * It never introduces a second navbar or a second scrolling container.
+ */
+.custom-story-return-link {
+  position: fixed;
+  z-index: 50;
+  left: clamp(0.75rem, 2vw, 1.5rem);
+  bottom: calc(0.85rem + env(safe-area-inset-bottom, 0px));
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.72rem 1rem;
+  border: 1px solid rgba(216, 213, 207, 0.28);
+  border-radius: 999px;
+  background: rgba(10, 9, 13, 0.94);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.44);
+  color: #f1e9e0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.custom-story-return-link:hover,
+.custom-story-return-link:focus-visible {
+  border-color: #b03a5a;
+  background: #1d111a;
+}
+
+.custom-story-return-link:focus-visible {
+  outline: 2px solid #d86a89;
+  outline-offset: 3px;
+}
+
+.custom-story-return-link > span:first-child {
+  font-size: 1.2rem;
+  line-height: 1;
+}
