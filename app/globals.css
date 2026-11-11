@@ -42,3 +42,14 @@ a {
   background: rgba(138, 42, 69, 0.5);
   color: var(--codex-text);
 }
+
+
+/*
+ * A custom story owns its landing-page navigation. The Codex site header
+ * remains on the catalog, preset story pages and chapter readers.
+ * This only changes the custom landing page; nothing inside the sandbox
+ * can style or manipulate the parent document.
+ */
+.site-shell:has(.custom-story-layout-host) > header {
+  display: none;
+}
