@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CodexSeal } from "./CodexSeal";
 
 const navItems = [
   { href: "/stories", label: "Historias" },
@@ -14,7 +15,7 @@ export function Navbar() {
         <nav className="flex items-center justify-between py-4">
           <Link href="/" className="group flex items-center gap-4">
             <div className="grid h-11 w-11 place-items-center rounded-full border border-[#8A2A45]/55 bg-[#141017] shadow-[0_0_20px_rgba(110,31,53,0.12)] transition-colors duration-200 group-hover:border-[#D8D5CF]/45">
-              <span className="codex-serif text-lg font-bold text-[#D8D5CF]">D</span>
+              <CodexSeal className="codex-serif text-lg text-[#D8D5CF]" />
             </div>
 
             <div>

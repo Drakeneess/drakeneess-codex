@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CodexReturnLink } from "@/components/layout/CodexReturnLink";
 import type {
   StoryChapter,
   StorySummary,
@@ -18,12 +19,16 @@ export function FossilChapterLayout({
   return (
     <article className="fossil-reader-shell story-body-font mx-auto w-full max-w-6xl">
       <header className="fossil-reader-header">
-        <Link
-          href={`/stories/${story.slug}`}
-          className="fossil-reader-back"
-        >
-          ← Volver al registro de exhibición
-        </Link>
+        <nav className="fossil-reader-navigation" aria-label="Navegación de lectura">
+          <CodexReturnLink variant="fossil" />
+          <span className="fossil-reader-navigation-divider" aria-hidden="true">/</span>
+          <Link
+            href={`/stories/${story.slug}`}
+            className="fossil-reader-back"
+          >
+            ← Volver al registro de exhibición
+          </Link>
+        </nav>
 
         <div className="fossil-reader-heading-row">
           <div>
