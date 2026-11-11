@@ -50,6 +50,39 @@ a {
  * This only changes the custom landing page; nothing inside the sandbox
  * can style or manipulate the parent document.
  */
-.site-shell:has(.custom-story-layout-host) > header {
+.site-shell:has(.custom-story-layout-host) > header,
+.site-shell:has(.custom-story-layout-host) > footer {
   display: none;
+}
+
+/*
+ * Only the sandbox document scrolls on custom story landing pages. Keeping
+ * the outer site and iframe fixed prevents three simultaneous scrollbars:
+ * the parent page, the iframe document and an author-styled body.
+ * This does NOT affect chapter readers or regular story pages.
+ */
+html:has(.custom-story-layout-host),
+body:has(.custom-story-layout-host) {
+  height: 100%;
+  overflow: hidden;
+}
+
+.site-shell:has(.custom-story-layout-host),
+.site-shell:has(.custom-story-layout-host) > .site-main {
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.custom-story-layout-host {
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.custom-story-layout-host > iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
