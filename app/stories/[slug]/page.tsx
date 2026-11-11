@@ -143,6 +143,14 @@ export default async function StoryPage({ params }: StoryPageProps) {
         <StoryThemeScope themeKey={story.theme.id} />
 
         <main className={`${theme.pageClass} story-page custom-story-layout-host`}>
+          <Link
+            href="/"
+            className="custom-story-return-link"
+            aria-label="Volver al inicio de The Drakeneess Codex"
+          >
+            <span aria-hidden="true">←</span>
+            <span>Volver al Codex</span>
+          </Link>
           <CustomStoryLayoutFrame
             title={`${story.title} — presentación personalizada`}
             srcDoc={customDocument}
