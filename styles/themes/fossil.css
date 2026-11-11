@@ -29,7 +29,7 @@
   font-size: 0.8rem;
 }
 
-.fossil-reader-home {
+.fossil-reader-navigation .fossil-reader-home {
   color: var(--story-accent-soft);
 }
 
