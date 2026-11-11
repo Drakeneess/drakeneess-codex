@@ -28,6 +28,71 @@
   color: var(--story-text);
 }
 
+/*
+ * Reading mode is deliberately quieter than the Codex catalog.
+ * Keep the site header/footer on every other route; the chapter layouts
+ * provide their own links to the story and to the Codex homepage.
+ *
+ * Do not alter body overflow or the bounded internal reader scroller.
+ */
+.site-shell:has(.chapter-reading-page) > header,
+.site-shell:has(.chapter-reading-page) > footer {
+  display: none;
+}
+
+.reader-priority-zone .reader-local-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.reader-priority-zone .reader-codex-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--story-muted);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.reader-priority-zone .reader-codex-sigil {
+  display: grid;
+  width: 1.7rem;
+  height: 1.7rem;
+  flex: 0 0 1.7rem;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--story-accent) 52%, transparent);
+  border-radius: 50%;
+  color: var(--story-accent-soft);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.93rem;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.reader-priority-zone .reader-story-back {
+  color: var(--story-accent);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.reader-priority-zone .reader-codex-home:hover,
+.reader-priority-zone .reader-story-back:hover,
+.reader-priority-zone .reader-codex-home:focus-visible,
+.reader-priority-zone .reader-story-back:focus-visible {
+  color: var(--story-text);
+}
+
+.reader-priority-zone .reader-codex-home:focus-visible,
+.reader-priority-zone .reader-story-back:focus-visible {
+  outline: 2px solid var(--story-accent);
+  outline-offset: 4px;
+}
+
 body:has(.reader-priority-zone) .site-shell,
 body:has(.reader-priority-zone) .site-main {
   min-height: 0 !important;
