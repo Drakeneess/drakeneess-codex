@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CodexReturnLink } from "@/components/layout/CodexReturnLink";
 import { notFound } from "next/navigation";
 import { getStoryBySlug } from "@/lib/stories";
 import { getThemeDefinition } from "@/lib/theme-registry";
@@ -143,19 +144,10 @@ export default async function StoryPage({ params }: StoryPageProps) {
         <StoryThemeScope themeKey={story.theme.id} />
 
         <main className={`${theme.pageClass} story-page custom-story-layout-host`}>
-          <Link
-            href="/"
-            className="custom-story-return-link"
+          <CodexReturnLink
+            variant="floating"
             style={getStoryVisualStyle(story.theme.id, story.visuals)}
-            aria-label="Volver al inicio de The Drakeneess Codex"
-          >
-            <span className="custom-story-return-arrow" aria-hidden="true">←</span>
-            <span className="custom-story-return-copy">
-              <span className="custom-story-return-kicker">Salir de la obra</span>
-              <span className="custom-story-return-title">Volver al Códice</span>
-            </span>
-            <span className="custom-story-return-seal" aria-hidden="true">D</span>
-          </Link>
+          />
           <CustomStoryLayoutFrame
             title={`${story.title} — presentación personalizada`}
             srcDoc={customDocument}

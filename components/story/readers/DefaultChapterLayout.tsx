@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CodexReturnLink } from "@/components/layout/CodexReturnLink";
 import type {
   StoryChapter,
   StorySummary,
@@ -19,10 +20,7 @@ export function DefaultChapterLayout({
     <article className="reader-shell mx-auto grid w-full max-w-7xl overflow-hidden">
       <aside className="reader-rail px-6 py-5 md:px-8 md:py-7">
         <nav className="reader-local-nav" aria-label="Navegación de lectura">
-          <Link href="/" className="reader-codex-home">
-            <span className="reader-codex-sigil" aria-hidden="true">D</span>
-            <span>Volver al Códice</span>
-          </Link>
+          <CodexReturnLink variant="reader" />
 
           <Link
             href={`/stories/${story.slug}`}
