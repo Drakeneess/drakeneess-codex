@@ -17,6 +17,27 @@
   border-bottom: 1px solid color-mix(in srgb, var(--story-accent) 24%, transparent);
 }
 
+.fossil-reader-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 0.85rem;
+}
+
+.fossil-reader-navigation-divider {
+  color: color-mix(in srgb, var(--story-accent) 55%, transparent);
+  font-size: 0.8rem;
+}
+
+.fossil-reader-home {
+  color: var(--story-accent-soft);
+}
+
+.fossil-reader-navigation a:focus-visible {
+  outline: 2px solid var(--story-accent);
+  outline-offset: 4px;
+}
+
 .fossil-reader-back {
   color: color-mix(in srgb, var(--story-accent-soft) 82%, transparent);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
