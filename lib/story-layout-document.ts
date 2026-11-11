@@ -186,6 +186,25 @@ function getResolvedVisualTokens(story: Story) {
 }`;
 }
 
+/**
+ * Keep a single scroll root within the sandbox. The site shell and iframe
+ * provide a stable viewport, so vh/dvh-based story CSS cannot create an
+ * auto-resize feedback loop. Story authors still control their inner layout.
+ */
+const STORY_FRAME_SCROLL_CSS = `
+html {
+  height: 100% !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+body {
+  min-height: 100% !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+`;
+
 export function buildCustomStoryLayoutDocument(
   story: Story,
 ) {
@@ -204,7 +223,7 @@ export function buildCustomStoryLayoutDocument(
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; connect-src 'none'; object-src 'none'; frame-src 'none'; form-action 'none'; base-uri 'none'; style-src 'unsafe-inline'; img-src https: http: data:; media-src https: http:; font-src https: http: data:;">
-  <style>${safeStyleText(variables)}\n${safeStyleText(story.layout.css)}</style>
+  <style>${safeStyleText(variables)}\n${safeStyleText(story.layout.css)}\n${STORY_FRAME_SCROLL_CSS}</style>
 </head>
 <body>
 ${content}
