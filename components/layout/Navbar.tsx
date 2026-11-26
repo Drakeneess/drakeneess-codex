@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CodexSeal } from "./CodexSeal";
 
 const navItems = [
   { href: "/stories", label: "Historias" },
@@ -11,10 +12,10 @@ export function Navbar() {
   return (
     <header className="relative z-10 border-b border-[#6E1F35]/35 bg-[#07070A]/95 shadow-[0_10px_32px_rgba(0,0,0,0.22)]">
       <div className="mx-auto max-w-7xl px-6">
-        <nav className="flex items-center justify-between py-4">
+        <nav className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 py-4">
           <Link href="/" className="group flex items-center gap-4">
             <div className="grid h-11 w-11 place-items-center rounded-full border border-[#8A2A45]/55 bg-[#141017] shadow-[0_0_20px_rgba(110,31,53,0.12)] transition-colors duration-200 group-hover:border-[#D8D5CF]/45">
-              <span className="codex-serif text-lg font-bold text-[#D8D5CF]">D</span>
+              <CodexSeal className="codex-serif text-lg text-[#D8D5CF]" />
             </div>
 
             <div>
@@ -27,12 +28,12 @@ export function Navbar() {
             </div>
           </Link>
 
-          <div className="hidden items-center gap-2 md:flex">
+          <div className="flex w-full flex-wrap items-center gap-1 md:w-auto md:gap-2">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-full border border-transparent px-4 py-2 text-sm text-[#A99CA3] transition-colors duration-200 hover:border-[#8A2A45]/35 hover:bg-[#6E1F35]/10 hover:text-[#F1E9E0]"
+                className="rounded-full border border-transparent px-2 py-2 text-xs sm:px-4 sm:text-sm text-[#A99CA3] transition-colors duration-200 hover:border-[#8A2A45]/35 hover:bg-[#6E1F35]/10 hover:text-[#F1E9E0]"
               >
                 {item.label}
               </Link>

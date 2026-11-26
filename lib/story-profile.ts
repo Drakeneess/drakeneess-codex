@@ -211,7 +211,7 @@ function resolveSafeHexColor(value: string | null) {
 }
 
 function resolveFontFamily(key: string | null) {
-  if (!key || !(key in FONT_REGISTRY)) {
+  if (!key || !Object.hasOwn(FONT_REGISTRY, key)) {
     return undefined;
   }
 
@@ -252,7 +252,7 @@ export function getStoryVisualStyle(
 }
 
 export function getStoryTextureClass(textureKey: string | null) {
-  if (!textureKey || !(textureKey in TEXTURE_CLASS_REGISTRY)) {
+  if (!textureKey || !Object.hasOwn(TEXTURE_CLASS_REGISTRY, textureKey)) {
     return "";
   }
 
@@ -262,7 +262,7 @@ export function getStoryTextureClass(textureKey: string | null) {
 }
 
 export function getStoryOrnament(ornamentKey: string | null) {
-  if (!ornamentKey || !(ornamentKey in ORNAMENT_REGISTRY)) {
+  if (!ornamentKey || !Object.hasOwn(ORNAMENT_REGISTRY, ornamentKey)) {
     return ORNAMENT_REGISTRY.section;
   }
 

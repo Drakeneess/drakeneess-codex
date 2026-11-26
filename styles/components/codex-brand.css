@@ -1,0 +1,43 @@
+/*
+ * Shared Codex brand primitives across index, story landing and chapter reader.
+ * Each route may choose its size, but navigation always has the same seal and
+ * destination. These are static styles: no filters or page animations.
+ */
+.codex-brand-seal {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.codex-brand-return {
+  text-decoration: none;
+}
+
+.codex-brand-return:focus-visible {
+  outline: 2px solid var(--story-accent-soft, var(--codex-platinum));
+  outline-offset: 4px;
+}
+
+.codex-return-inline-seal {
+  display: inline-grid;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: 0 0 1.5rem;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--story-accent) 52%, transparent);
+  border-radius: 50%;
+  color: var(--story-accent-soft);
+  font-size: 0.84rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.fossil-reader-navigation .codex-brand-return {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .codex-brand-return { scroll-behavior: auto; }
+}

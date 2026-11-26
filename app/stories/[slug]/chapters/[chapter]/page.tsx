@@ -36,7 +36,7 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
       <StoryThemeScope themeKey={result.story.theme.id} />
 
       <section
-        className={`${theme.readerClass} story-page story-visual-scope ${readerPriorityClass} px-4 py-4 md:px-6 md:py-6`}
+        className={`${theme.readerClass} story-page story-visual-scope chapter-reading-page ${readerPriorityClass} px-4 py-4 md:px-6 md:py-6`}
         style={visualStyle}
       >
         <StoryChapterLayout story={result.story} chapter={result.chapter}>

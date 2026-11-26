@@ -133,7 +133,7 @@ export const themeRegistry = {
 export type StoryThemeKey = keyof typeof themeRegistry;
 
 export function resolveStoryThemeKey(themeKey?: string): StoryThemeKey {
-  if (!themeKey || !(themeKey in themeRegistry)) {
+  if (!themeKey || !Object.hasOwn(themeRegistry, themeKey)) {
     return DEFAULT_STORY_THEME_KEY;
   }
 

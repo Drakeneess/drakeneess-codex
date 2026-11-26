@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CodexReturnLink } from "@/components/layout/CodexReturnLink";
 import { notFound } from "next/navigation";
 import { getStoryBySlug } from "@/lib/stories";
 import { getThemeDefinition } from "@/lib/theme-registry";
@@ -142,7 +143,11 @@ export default async function StoryPage({ params }: StoryPageProps) {
       <>
         <StoryThemeScope themeKey={story.theme.id} />
 
-        <main className={`${theme.pageClass} story-page min-h-screen overflow-x-hidden`}>
+        <main className={`${theme.pageClass} story-page custom-story-layout-host`}>
+          <CodexReturnLink
+            variant="floating"
+            style={getStoryVisualStyle(story.theme.id, story.visuals)}
+          />
           <CustomStoryLayoutFrame
             title={`${story.title} — presentación personalizada`}
             srcDoc={customDocument}

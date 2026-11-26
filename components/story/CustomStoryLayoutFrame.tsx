@@ -1,108 +1,50 @@
 "use client";
 
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useRef } from "react";
+import { bindStoryFrameNavigation } from "@/lib/story-frame-navigation";
 
 type CustomStoryLayoutFrameProps = {
   title: string;
   srcDoc: string;
 };
 
-const MIN_FRAME_HEIGHT = 680;
-const MAX_FRAME_HEIGHT = 50_000;
+function getDocumentKey(srcDoc: string) {
+  let hash = 2166136261;
+  for (let index = 0; index < srcDoc.length; index += 1) {
+    hash = Math.imul(hash ^ srcDoc.charCodeAt(index), 16777619);
+  }
+  return `${srcDoc.length}-${hash >>> 0}`;
+}
 
-export function CustomStoryLayoutFrame({
-  title,
-  srcDoc,
-}: CustomStoryLayoutFrameProps) {
-  const frameRef =
-    useRef<HTMLIFrameElement>(null);
+function CustomStoryFrameDocument({ title, srcDoc }: CustomStoryLayoutFrameProps) {
+  const frameRef = useRef<HTMLIFrameElement>(null);
+  const cleanupRef = useRef<(() => void) | null>(null);
 
-  const observerRef =
-    useRef<ResizeObserver | null>(null);
-
-  const [height, setHeight] =
-    useState(MIN_FRAME_HEIGHT);
-
-  const measure = useCallback(() => {
+  const connectNavigation = useCallback(() => {
+    cleanupRef.current?.();
+    cleanupRef.current = null;
     const frame = frameRef.current;
-    const document = frame?.contentDocument;
+    const doc = frame?.contentDocument;
+    if (!doc || doc.URL !== "about:srcdoc") return;
 
-    if (!document) {
-      return;
-    }
-
-    const nextHeight = Math.min(
-      MAX_FRAME_HEIGHT,
-      Math.max(
-        MIN_FRAME_HEIGHT,
-        document.documentElement?.scrollHeight ?? 0,
-        document.body?.scrollHeight ?? 0,
-      ),
-    );
-
-    setHeight((current) =>
-      Math.abs(current - nextHeight) > 1
-        ? nextHeight
-        : current,
-    );
+    cleanupRef.current = bindStoryFrameNavigation(doc, window.location.href, (href, newTab) => {
+      if (newTab) {
+        window.open(href, "_blank", "noopener,noreferrer");
+      } else {
+        // A real top-level navigation avoids nested documents and stale frames.
+        window.location.assign(href);
+      }
+    });
   }, []);
 
-  const connectObserver = useCallback(() => {
-    observerRef.current?.disconnect();
-    observerRef.current = null;
-
-    const frame = frameRef.current;
-    const document = frame?.contentDocument;
-
-    if (!document) {
-      return;
-    }
-
-    measure();
-
-    if (typeof ResizeObserver === "undefined") {
-      return;
-    }
-
-    const observer = new ResizeObserver(() => {
-      window.requestAnimationFrame(measure);
-    });
-
-    if (document.documentElement) {
-      observer.observe(document.documentElement);
-    }
-
-    if (document.body) {
-      observer.observe(document.body);
-    }
-
-    observerRef.current = observer;
-  }, [measure]);
-
   useEffect(() => {
-    const handleResize = () => {
-      window.requestAnimationFrame(measure);
-    };
-
-    window.addEventListener(
-      "resize",
-      handleResize,
-    );
-
+    // The iframe may have loaded before React hydrated.
+    connectNavigation();
     return () => {
-      window.removeEventListener(
-        "resize",
-        handleResize,
-      );
-
-      observerRef.current?.disconnect();
+      cleanupRef.current?.();
+      cleanupRef.current = null;
     };
-  }, [measure]);
+  }, [connectNavigation]);
 
   return (
     <iframe
@@ -110,11 +52,12 @@ export function CustomStoryLayoutFrame({
       title={title}
       srcDoc={srcDoc}
       sandbox="allow-same-origin allow-top-navigation-by-user-activation"
-      onLoad={connectObserver}
-      className="block w-full border-0 bg-transparent"
-      style={{
-        height,
-      }}
+      onLoad={connectNavigation}
+      className="block h-full w-full border-0 bg-transparent"
     />
   );
+}
+
+export function CustomStoryLayoutFrame(props: CustomStoryLayoutFrameProps) {
+  return <CustomStoryFrameDocument key={getDocumentKey(props.srcDoc)} {...props} />;
 }
