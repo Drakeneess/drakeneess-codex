@@ -8,6 +8,7 @@
 @import "../styles/components/cards.css";
 @import "../styles/components/catalog.css";
 @import "../styles/components/home.css";
+@import "../styles/components/home-interactive.css";
 @import "../styles/components/reader.css";
 @import "../styles/components/story-profile.css";
 @import "../styles/components/codex-brand.css";
@@ -47,7 +48,7 @@ a {
 
 /*
  * A custom story owns its landing-page navigation. The Codex site header
- * remains on the catalog, preset story pages and chapter readers.
+ * remains on the catalog and preset story pages; chapter pages use reader navigation.
  * This only changes the custom landing page; nothing inside the sandbox
  * can style or manipulate the parent document.
  */

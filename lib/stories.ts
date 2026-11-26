@@ -4,6 +4,7 @@ import {
   PublicCodexApiError,
   PublicCodexConfigError,
   PublicCodexNetworkError,
+  PublicCodexResponseError,
   getChapterBySlug as getPublicChapterBySlug,
   getStories as getPublicStories,
   getStoryBySlug as getPublicStoryBySlug,
@@ -125,7 +126,8 @@ function isStorySourceUnavailable(error: unknown) {
   return (
     error instanceof PublicCodexConfigError ||
     error instanceof PublicCodexNetworkError ||
-    error instanceof PublicCodexApiError
+    error instanceof PublicCodexApiError ||
+    error instanceof PublicCodexResponseError
   );
 }
 

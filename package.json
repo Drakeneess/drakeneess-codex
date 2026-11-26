@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:layout": "node --experimental-strip-types --test lib/story-layout.test.mjs"
+    "test:layout": "node --experimental-strip-types --test lib/story-layout.test.mjs lib/story-frame-navigation.test.mjs"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",

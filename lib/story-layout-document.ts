@@ -110,15 +110,12 @@ function expandPlaceholders(
       ),
   };
 
-  let html = story.layout.html;
-
-  for (const [placeholder, value] of Object.entries(replacements)) {
-    html = html.split(placeholder).join(value);
-  }
-
-  return html.replace(
-    /{{chapters}}/g,
-    buildChapterMarkup(story),
+  // Expand only tokens present in the original template. Story text must not
+  // be interpreted as another placeholder after it has already been escaped.
+  return story.layout.html.replace(/\{\{(?:story\.[a-zA-Z]+|chapters)\}\}/g, (token) =>
+    token === "{{chapters}}"
+      ? buildChapterMarkup(story)
+      : Object.hasOwn(replacements, token) ? replacements[token] : token,
   );
 }
 
@@ -177,6 +174,7 @@ function getResolvedVisualTokens(story: Story) {
   --story-accent: ${accent};
   --story-accent-soft: ${accentSoft};
   --story-background: ${background};
+  --story-bg: var(--story-background);
   --story-panel: ${panel};
   --story-display-font: ${displayFont};
   --story-body-font: ${bodyFont};
@@ -191,6 +189,11 @@ function getResolvedVisualTokens(story: Story) {
  * provide a stable viewport, so vh/dvh-based story CSS cannot create an
  * auto-resize feedback loop. Story authors still control their inner layout.
  */
+const STORY_FRAME_BASE_CSS = `
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--story-background); color: var(--story-text); font-family: var(--story-body-font); }
+`;
+
 const STORY_FRAME_SCROLL_CSS = `
 html {
   height: 100% !important;
@@ -218,12 +221,15 @@ export function buildCustomStoryLayoutDocument(
     expandPlaceholders(story);
 
   return `<!doctype html>
-<html lang=${JSON.stringify(language)}>
+<html lang="${escapeHtml(language)}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; connect-src 'none'; object-src 'none'; frame-src 'none'; form-action 'none'; base-uri 'none'; style-src 'unsafe-inline'; img-src https: http: data:; media-src https: http:; font-src https: http: data:;">
-  <style>${safeStyleText(variables)}\n${safeStyleText(story.layout.css)}\n${STORY_FRAME_SCROLL_CSS}</style>
+  <base target="_top">
+  <style>${safeStyleText(variables)}\n${STORY_FRAME_BASE_CSS}</style>
+  <style>${safeStyleText(story.layout.css)}</style>
+  <style>${STORY_FRAME_SCROLL_CSS}</style>
 </head>
 <body>
 ${content}

@@ -32,3 +32,10 @@
 - Probar scroll rápido en Opera/Chromium; sin bloques negros, sin footer oculto en rutas donde corresponde.
 - Tests `npm run test:layout`, `npm run build`, `npm run lint` y revisión visual local.
 - Si una vista falla, corregirla **en la misma rama de pruebas** antes de abrir un merge de producción.
+
+## Integration audit
+
+- The home interactive stylesheet is explicitly loaded after its base stylesheet.
+- In a custom story, fragment links scroll inside the frame and HTTP(S) route links navigate the outer window. No authored JavaScript is enabled.
+- Normal chapter readers fill the available viewport, keeping explicit bounded grid rows and the original internal scroll containment; small viewports may scroll the outer page naturally.
+- Global navigation remains accessible on mobile. Unknown theme/visual registry keys fall back to registered defaults.

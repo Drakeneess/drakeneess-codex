@@ -118,8 +118,13 @@ body:has(.reader-priority-zone) .site-main {
   text-shadow: none !important;
 }
 
+.chapter-reading-page.reader-priority-zone {
+  min-height: 100dvh !important;
+  --reader-outer-padding: 2rem;
+}
+
 .reader-priority-zone .reader-shell {
-  height: clamp(28rem, 72dvh, 56rem);
+  height: max(28rem, calc(100dvh - var(--reader-outer-padding, 2rem)));
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto minmax(0, 1fr);
   border: 1px solid color-mix(in srgb, var(--story-accent) 40%, transparent);
@@ -235,6 +240,10 @@ body:has(.reader-priority-zone) .site-main {
 
 .reader-priority-zone .remote-mdx-chunk {
   display: contents;
+}
+
+@media (min-width: 768px) {
+  .chapter-reading-page.reader-priority-zone { --reader-outer-padding: 3rem; }
 }
 
 @media (min-width: 900px) {
